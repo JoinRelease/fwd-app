@@ -1,0 +1,3 @@
+rootProject.name = 'fwd'
+
+include ':app'
