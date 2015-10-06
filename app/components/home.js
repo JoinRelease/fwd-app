@@ -25,7 +25,7 @@ var LogView = require('./log_view');
 // var DiscoverView = require('./js/discover_view');
 // var ProfileView = requrie('./js/profile_view')
 
-var fwd = React.createClass({
+var Home = React.createClass({
   getInitialState: function () {
     return {
       selectedTab: 'log'
@@ -124,4 +124,4 @@ var styles = StyleSheet.create({
   }
 });
 
-AppRegistry.registerComponent('fwd', () => fwd);
+module.exports = Home;
