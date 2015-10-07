@@ -3,6 +3,7 @@ var AppConstants = require('../Constants/AppConstants');
 var AuthService  = require('../Api/AuthService');
 
 var AuthActions = {
+
   authCallback: function(callback) {
     return function(error, data) {
       if(callback) callback(error);
@@ -21,8 +22,8 @@ var AuthActions = {
     AuthService.login(username, password, this.authCallback(callback));
   },
 
-  submitSignup: function(username, password, callback) {
-    AuthService.signup(username, password, this.authCallback(callback));
+  submitSignup: function(username, password, password_confirm, callback) {
+    AuthService.signup(username, password, password_confirm, this.authCallback(callback));
   }
 };
 

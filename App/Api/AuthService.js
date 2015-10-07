@@ -1,6 +1,7 @@
 var client = require('../Api/HTTPClient')
 
 var UserService = {
+
   parseAccount: function(response) {
     if (!response) return null;
 
@@ -20,8 +21,8 @@ var UserService = {
     };
   },
 
-  signup: function(username, password, callback) {
-    client.post("api/signup", {username: username, password: password}, UserService.accountCallback(callback));
+  signup: function(username, password, password_confirm, callback) {
+    client.post("api/signup", {username: username, password: password, password_confirm: password_confirm}, UserService.accountCallback(callback));
   },
 
   login: function(username, password, callback) {
