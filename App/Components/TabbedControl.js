@@ -4,20 +4,25 @@ var React = require('react-native');
 var {
   StyleSheet,
   TouchableHighlight,
-  View
+  View,
+  ScrollView
 } = React;
 
 var cssVar     = require('../Lib/cssVar');
 var Text       = require('../Components/Text');
 var AppActions = require('../Actions/AppActions');
+var TabBarIOS = require('TabBarIOS');
+var Icon = require('react-native-vector-icons/Ionicons');
+var TabBarItemIOS = Icon.TabBarItem;
 
-var SegmentedControl = React.createClass({
-  segmentComponents: function() {
+var TabbedControl = React.createClass({
+
+  tabComponents: function() {
     var out = [];
     for(var i = 0; i < this.props.items.length; i++) {
       var item = this.props.items[i];
       out.push(
-        <Segment {...item} key={"item" + i} currentRoute={this.props.currentRoute} />
+        <TabItem {...item} key={"item" + i} currentRoute={this.props.currentRoute} content={this.props.content}/>
       );
     };
     return out;
@@ -25,57 +30,38 @@ var SegmentedControl = React.createClass({
 
   render: function() {
     return (
-      <View style={styles.container}>
-        <View style={styles.control}>
-          {this.segmentComponents()}
-        </View>
-      </View>
+      <TabBarIOS barTintColor={'black'}>
+        {this.tabComponents()}
+      </TabBarIOS>
     );
   }
 });
 
-var Segment = React.createClass({
+var TabItem = React.createClass({
 
   onSelection: function() {
     AppActions.launchRelativeItem(this.props.currentRoute, this.props);
   },
 
   render: function() {
-    if (this.props.selected) {
-      return (
-        <View
-          style={styles.flex}
-        >
-          <View style={[styles.button, styles.selectedButton]}>
-            <Text style={[styles.text, styles.selectedText]}>
-              {this.props.title}
-            </Text>
-          </View>
-        </View>
-      );
-    }
-    else {
-      return (
-        <TouchableHighlight
-          style={styles.flex}
-          underlayColor='#FFFFFF'
-          onPress={this.onSelection}
-        >
-          <View style={[styles.button, styles.linkButton]}>
-            <Text style={[styles.text, styles.linkText]}>
-              {this.props.title}
-            </Text>
-          </View>
-        </TouchableHighlight>
-      );
-    }
+    return (
+      <TabBarItemIOS
+        iconName= {this.props.icon}
+        selectedIconName={this.props.icon}
+        title = {this.props.title}
+        selected = {this.props.selected}
+        onPress={this.onSelection}
+      >
+      {this.props.content}
+      </TabBarItemIOS>
+    );
   }
 });
 
 
 var styles = StyleSheet.create({
   container: {
-    backgroundColor: cssVar('blue50'),
+    backgroundColor: 'black',//cssVar('blue50'),
     padding: 10
   },
   control: {
@@ -111,4 +97,4 @@ var styles = StyleSheet.create({
   }
 });
 
-module.exports = SegmentedControl;
+module.exports = TabbedControl;

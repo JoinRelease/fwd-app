@@ -58,14 +58,14 @@ var HTTPClient = {
   addHeaders: function(req) {
     // TODO: load version from somewhere
     var appVersion = "1.0";
-    var userAgent = "fwd iPhone v" + appVersion;
+    var userAgent = "Fwd iPhone v" + appVersion;
     var locale = 'en-US';
 
     req = req.accept('application/json');
     req = req.type('application/json');
     req = req.set('User-Agent', userAgent);
     req = req.set('X-CLIENT-VERSION', appVersion);
-    req = req.set('X-Sample-User-Agent', userAgent);
+    req = req.set('X-Fwd-User-Agent', userAgent);
     req = req.set('X-LOCALE', locale);
 
     var currentUser = CurrentUserStore.get();

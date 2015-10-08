@@ -20,7 +20,8 @@ var NavBarHelper       = require('../Mixins/NavBarHelper');
 
 var Loading          = require('../Screens/Loading');
 var Text             = require('../Components/Text');
-var SegmentedControl = require('../Components/SegmentedControl');
+var WeekView         = require('../Components/WeekView');
+var TabbedControl    = require('../Components/TabbedControl');
 var SimpleList       = require('../Components/SimpleList');
 
 var ListHelper = {
@@ -85,33 +86,44 @@ var ListHelper = {
 
   renderEmpty: function() {
     return(
-      <Text>
-        No Items
-      </Text>
+      <View style={styles.container} >
+        <Text style={styles.description}>
+          No Content
+        </Text>
+      </View>
     );
   },
 
   renderHeader: function() {
     if (!this.props.segment) return null;
     return (
-      <SegmentedControl currentRoute={this.props.currentRoute} {...this.props.segment} />
+      <WeekView currentRoute={this.props.currentRoute} {...this.props.segment} />
+    );
+  },
+
+  renderTabs: function(content) {
+    return (
+      <TabbedControl currentRoute={this.props.currentRoute} {...this.props.tabItem} content={content}/>
     );
   },
 
   renderContent: function() {
     var header = this.renderHeader();
+
     var content;
+    var empty;
     if (this.state.items.length === 0) {
       content = this.renderEmpty();
     }
     else {
       content = this.renderItems();
     }
-
+    var tabs = this.renderTabs(content);
     return (
       <View style={styles.flex}>
-        {header}
-        {content}
+
+        {tabs}
+
       </View>
     );
   },
@@ -130,6 +142,18 @@ var ListHelper = {
 var styles = StyleSheet.create({
   flex: {
     flex: 1
+  },
+  description: {
+    fontSize: 20,
+    textAlign: 'center',
+    color: '#FFFFFF'
+  },
+  container: {
+    flex: 1,
+    flexDirection: 'column',
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: '#123456',
   }
 });
 

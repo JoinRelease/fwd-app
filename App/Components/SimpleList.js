@@ -31,10 +31,11 @@ var SimpleList = React.createClass({
     var Component = this.props.reloadList ? RefreshableListView : ListView;
     return (
       <Component
-        automaticallyAdjustContentInsets={false}
+        automaticallyAdjustContentInsets={true}
         dataSource={ds.cloneWithRows(this.props.items)}
         renderRow={this.renderRow}
         loadData={this.props.reloadList}
+        refreshDescription="Working Some Magic"
       />
     );
   }

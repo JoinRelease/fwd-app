@@ -26,7 +26,23 @@ var PostList = React.createClass({
             replacePath: 'follows'
           }
         ]
-      }
+      },
+      tabItem: {
+        items: [
+          {
+            title: 'Posts',
+            replacePath: 'posts',
+            selected: true,
+            icon: 'ios-paper'
+          },
+          {
+            title: 'Follows',
+            replacePath: 'follows',
+            icon: 'person'
+          }
+
+        ]
+      },
     };
   },
 

@@ -1,4 +1,4 @@
-var React = require('react-native');
+ var React = require('react-native');
 var NavigationBar = require('../Navigation/NavigationBar');
 
 var LoggedIn = React.createClass({

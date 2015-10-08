@@ -26,7 +26,23 @@ var FollowList = React.createClass({
             selected: true
           }
         ]
-      }
+      },
+      tabItem: {
+        items: [
+          {
+            title: 'Posts',
+            replacePath: 'posts',
+
+            icon: 'ios-paper'
+          },
+          {
+            title: 'Follows',
+            replacePath: 'follows',
+            selected: true,
+            icon: 'person'
+          }
+        ]
+      },
     };
   },
 

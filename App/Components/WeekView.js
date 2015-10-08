@@ -10,14 +10,17 @@ var {
 var cssVar     = require('../Lib/cssVar');
 var Text       = require('../Components/Text');
 var AppActions = require('../Actions/AppActions');
+//var ScrollableTabView = require('react-native-scrollable-tab-view');
 
-var SegmentedControl = React.createClass({
-  segmentComponents: function() {
+var WeekView = React.createClass({
+
+  dayComponents: function() {
+    var days = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat']
     var out = [];
     for(var i = 0; i < this.props.items.length; i++) {
       var item = this.props.items[i];
       out.push(
-        <Segment {...item} key={"item" + i} currentRoute={this.props.currentRoute} />
+        <DayItem {...item} key={"item" + i} currentRoute={this.props.currentRoute} content={this.props.content}/>
       );
     };
     return out;
@@ -34,7 +37,7 @@ var SegmentedControl = React.createClass({
   }
 });
 
-var Segment = React.createClass({
+var DayItem = React.createClass({
 
   onSelection: function() {
     AppActions.launchRelativeItem(this.props.currentRoute, this.props);
@@ -75,8 +78,7 @@ var Segment = React.createClass({
 
 var styles = StyleSheet.create({
   container: {
-    backgroundColor: cssVar('blue50'),
-    padding: 10
+    backgroundColor: 'black'//cssVar('blue50'),
   },
   control: {
     flex: 1,
@@ -111,4 +113,4 @@ var styles = StyleSheet.create({
   }
 });
 
-module.exports = SegmentedControl;
+module.exports = WeekView;
