@@ -26,7 +26,7 @@ var SegmentedControl    = require('../Components/SegmentedControl');
 var SimpleList       = require('../Components/SimpleList');
 var AppActions       = require('../Actions/AppActions')
 
-var ListHelper = {
+var ChatHelper = {
   mixins: [NavigationListener, NavBarHelper],
 
   getInitialState: function() {
@@ -147,8 +147,7 @@ var ListHelper = {
     var header = this.renderHeader();
     return (
       <View style={styles.flex}>
-        {header}
-        {tabs}
+        {content}
       </View>
     );
   },
@@ -182,4 +181,4 @@ var styles = StyleSheet.create({
   }
 });
 
-module.exports = ListHelper;
+module.exports = ChatHelper;

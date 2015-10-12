@@ -10,6 +10,8 @@ var cssVar = require('../Lib/cssVar');
 
 var NavigatorNavigationBarStyles = require('NavigatorNavigationBarStyles');
 var NavigationBarRouteMapper     = require('../Navigation/NavigationBarRouteMapper');
+var DispatcherListener = require('../Mixins/DispatcherListener');
+var AppConstants = require('../Constants/AppConstants');
 
 var stacksEqual = function(one, two, length) {
   if (one.length < length) return false;
@@ -25,12 +27,18 @@ var stacksEqual = function(one, two, length) {
 
 var Container = React.createClass({
   render: function() {
+    var statBar;
+    if (this.props.navBarHidden) {
+      statBar =  (<View style={styles.navBarSmall}/>);
+    }
     var Component = this.props.route.component;
+
     return (
-      <View 
+      <View
         style={[styles.scene, this.props.navBarHidden && styles.sceneHidden]}
         ref={this.props.onLoadedScene}
       >
+      {statBar}
         <Component ref="mainComponent"
           navigator={this.props.navigator}
           currentRoute={this.props.route}
@@ -42,15 +50,12 @@ var Container = React.createClass({
 });
 
 var NavigationBar = {
-  getInitialState: function() {
-    return {};
-  },
 
   renderScene: function(route, navigator) {
     console.log('renderScene: ' + route.routePath);
-
     return(
-      <Container 
+
+      <Container
         ref={this.onLoadedScene}
         route={route}
         navigator={navigator}
@@ -71,7 +76,7 @@ var NavigationBar = {
 
   componentDidUpdate: function(prevProps, prevState) {
     var current = this.refs.navigator.getCurrentRoutes();
-    
+
     if (!current) return; // otherwise initial
 
     var next = this.props.routeStack.path;
@@ -115,8 +120,9 @@ var NavigationBar = {
   },
 
   renderNavBar: function() {
-    if (this.props.navBarHidden) return null;
-
+    if (this.state.navBarHidden){
+      return null;
+    }
     return (
       <Navigator.NavigationBar
         routeMapper={new NavigationBarRouteMapper()}
@@ -124,7 +130,6 @@ var NavigationBar = {
       />
     );
   },
-
   render: function() {
     return (
       <View style={styles.appContainer}>
@@ -132,7 +137,7 @@ var NavigationBar = {
           ref="navigator"
           debugOverlay={false}
           renderScene={this.renderScene}
-          navBarHidden={this.props.navBarHidden}
+          navBarHidden={this.state.navbarHidden}
           initialRouteStack={this.props.routeStack.path}
           navigationBar={this.renderNavBar()}
         />
@@ -148,6 +153,10 @@ var styles = StyleSheet.create({
   navBar: {
     backgroundColor: cssVar('blue50'),
     height: NavigatorNavigationBarStyles.General.TotalNavHeight
+  },
+  navBarSmall: {
+    backgroundColor: cssVar('blue50'),
+    height: 20,
   },
   scene: {
     flex: 1,

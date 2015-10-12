@@ -16,11 +16,24 @@ var WeekView = React.createClass({
 
   dayComponents: function() {
     var days = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat']
+    var d = new Date();
+    var weekday = new Array(7);
+    weekday[0]=  "Sun";
+    weekday[1] = "Mon";
+    weekday[2] = "Tue";
+    weekday[3] = "Wed";
+    weekday[4] = "Thu";
+    weekday[5] = "Fri";
+    weekday[6] = "Sat";
+
+    var n = weekday[d.getDay()];
+
+
     var out = [];
     for(var i = 0; i < this.props.items.length; i++) {
       var item = this.props.items[i];
       out.push(
-        <DayItem {...item} key={"item" + i} currentRoute={this.props.currentRoute} content={this.props.content}/>
+        <DayItem {...item} key={"Day" + i} currentRoute={this.props.currentRoute} updateDay={this.props.updateDay}/>
       );
     };
     return out;
@@ -30,7 +43,7 @@ var WeekView = React.createClass({
     return (
       <View style={styles.container}>
         <View style={styles.control}>
-          {this.segmentComponents()}
+          {this.dayComponents()}
         </View>
       </View>
     );
@@ -40,7 +53,8 @@ var WeekView = React.createClass({
 var DayItem = React.createClass({
 
   onSelection: function() {
-    AppActions.launchRelativeItem(this.props.currentRoute, this.props);
+    // AppActions.launchRelativeItem(this.props.currentRoute, this.props);
+    this.props.updateDay(this.props.title);
   },
 
   render: function() {

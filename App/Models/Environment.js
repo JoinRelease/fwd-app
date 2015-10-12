@@ -15,7 +15,7 @@ Model.prototype.setAttributes = function(options) {
 Model.prototype.getApiHost = function() {
   switch(this.data.name) {
     case 'test':
-      return 'http://api.taidupree.me';
+      return 'http://localhost:3000';
     case 'debug':
       return 'http://localhost:3000';
     default:

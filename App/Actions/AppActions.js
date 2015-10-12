@@ -23,6 +23,13 @@ var AppActions = {
     });
   },
 
+  hideNavBar: function() {
+    console.log('Hiding navbar')
+    Dispatcher.dispatch({
+      actionType: AppConstants.HIDE_NAVBAR
+    })
+  },
+
   launchExternalURL: function(url) {
     console.log("Launching! " + url);
     Dispatcher.dispatch({
@@ -74,7 +81,7 @@ var AppActions = {
     }
     AppActions.launchRoutePath(previous.routePath);
   }
-  
+
 };
 
 module.exports = AppActions;

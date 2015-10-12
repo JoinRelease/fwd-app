@@ -3,6 +3,7 @@ var React = require('react-native');
 var ListHelper = require('../Mixins/ListHelper');
 
 var FollowListStore = require('../Stores/FollowListStore');
+var ChatListStore = require('../Stores/ChatListStore')
 var FollowActions   = require('../Actions/FollowActions');
 
 var FollowList = React.createClass({
@@ -14,36 +15,22 @@ var FollowList = React.createClass({
       listProps: {
         nextIcon: true
       },
-      segment: {
-        items: [
-          {
-            title: 'Posts',
-            replacePath: 'posts'
-          },
-          {
-            title: 'Follows',
-            replacePath: 'follows',
-            selected: true
-          }
-        ]
-      },
       tabItem: {
         items: [
           {
             title: 'Posts',
             replacePath: 'posts',
-
             icon: 'ios-paper'
           },
           {
             title: 'Follows',
             replacePath: 'follows',
-            selected: true,
             icon: 'person'
           },
           {
             title: 'Chat',
             replacePath: 'chatRoomList',
+            selected: true,
             icon: 'chatboxes'
           }
         ]
@@ -52,18 +39,41 @@ var FollowList = React.createClass({
   },
 
   getListItems: function() {
-    return FollowListStore.get(this.getUsername());
+    return (
+      [
+      {
+        data: {
+          id: 1,
+          name: 'Nutrition Team',
+          replacePath: '_nutrition'
+        }
+      },
+      {
+        data: {
+          id: 2,
+          name: 'Cooking Hotline',
+          replacePath: '_cooking'
+        }
+      },
+      {
+        data: {
+          id: 3,
+          name: 'Activity Team',
+          replacePath: '_activity'
+        }
+      }
+      ]);
   },
 
   isListChange: function(username) {
     return this.getUsername() == username;
   },
 
-  getItemProps: function(follow) {
+  getItemProps: function(room) {
     return {
-      key: follow.data.id,
-      title: follow.data.username,
-      subPath: follow.data.username
+      key: room.data.id,
+      title: room.data.name,
+      subPath: room.data.replacePath
     }
   },
 

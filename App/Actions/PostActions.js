@@ -20,7 +20,6 @@ var PostActions = {
   createPost: function(content, callback) {
     PostService.createPost(content, function(error, postProps) {
       if(callback) callback(error);
-
       if (!error) {
         Dispatcher.dispatch({
           actionType: AppConstants.POST_ADDED,

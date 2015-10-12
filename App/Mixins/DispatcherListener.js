@@ -20,7 +20,6 @@ var DispatcherListener = {
       }
     }
   },
-
   componentDidMount: function() {
     this.unregisterDispatcher();
 

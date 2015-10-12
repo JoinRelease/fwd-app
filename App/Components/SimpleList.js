@@ -9,6 +9,7 @@ var SimpleListItem = require('../Components/SimpleListItem');
 
 var ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
 
+
 var SimpleList = React.createClass({
   renderRow: function(item, sectionId, rowId) {
     var passAlong = {};
@@ -25,6 +26,10 @@ var SimpleList = React.createClass({
     return (
       <SimpleListItem {...passAlong} {...item} key={"item" + (item.key || rowId)} />
     );
+  },
+
+  onPress: function() {
+    this.props.hideNavBar()
   },
 
   render: function() {

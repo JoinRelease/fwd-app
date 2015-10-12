@@ -10,7 +10,9 @@ Model.prototype.setAttributes = function(options) {
   assign(this.data, {
     id: options.id,
     content: options.content,
-    username: options.username
+    username: options.username,
+    created_at: options.created_at,
+    updated_at: options.updated_at
   });
 };
 

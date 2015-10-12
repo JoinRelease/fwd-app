@@ -30,11 +30,20 @@ var NavigationTitle = React.createClass({
 
   render: function() {
     var title = this.state.updatedTitle || this.props.route.title;
-    return (
-      <Text style={styles.navBarTitleText}>
-        {title}
-      </Text>
-    );
+    if (this.props.titleComponent) {
+      return (
+        <View>
+          {this.props.titleComponent}
+        </View>
+      );
+    }
+    else {
+      return (
+        <Text style={styles.navBarTitleText}>
+          {title}
+        </Text>
+      );
+    }
   }
 });
 

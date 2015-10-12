@@ -35,6 +35,18 @@ var Routes = {
       }
     };
   },
+  ChatRoomList: function(name) {
+    return {
+      component: require('../Screens/ChatRoomList'),
+      Title: ''
+    }
+  },
+  ChatRoom: function(name) {
+    return {
+      component: require('../Screens/ChatRoom'),
+      title: name
+    }
+  },
 
   Settings: function() {
     return {
@@ -52,6 +64,36 @@ var Routes = {
       }
     };
   },
+
+  NutritionRoom: function() {
+    return {
+      component: require('../Screens/NutritionRoom'),
+      title: 'Nutrition Team',
+      navBack: {
+        label: 'Messages'
+      }
+    }
+  },
+  CookingRoom: function() {
+    return {
+      component: require('../Screens/CookingRoom'),
+      title: 'Cooking Hotline',
+      navBack: {
+        label: 'Messages'
+      }
+    }
+  },
+  ActivityRoom: function() {
+    return {
+      component: require('../Screens/ActivityRoom'),
+      title: 'Activity Team',
+      navBack: {
+        label: 'Messages'
+      }
+    }
+  }
+
+
 };
 
 
@@ -65,6 +107,47 @@ var listRoute = function(route, defaultRoute) {
         // only on 'Dashboard'
         if(username) return null;
         return Routes.Settings();
+      case '_nutrition':
+      console.log('nutri');
+        return Routes.NutritionRoom();
+      case '_cooking':
+      console.log('Cookin');
+        return Routes.CookingRoom();
+      case '_activity':
+       console.log('Activity');
+        return Routes.ActivityRoom();
+      default:
+        if (!defaultRoute) return null;
+        return defaultRoute(path);
+    }
+  }
+
+  if(!route.navRight) {
+    route.navRight = {
+      subPath: '_post',
+      label: '+' // TODO: icon font
+    };
+  }
+
+  if(!route.navLeft && !username) {
+    route.navLeft = {
+      subPath: '_settings',
+      label: 'Me' // TODO: icon font
+    };
+  }
+  return route;
+};
+
+var chatRoomRoute = function(route, defaultRoute) {
+  var name = route.passProps ? route.passProps.name : null;
+  route.parse = function(path) {
+    switch(path) {
+      case '_nutrition':
+        return Routes.NutritionRoom();
+      case '_cooking':
+        return Routes.CookingRoom();
+      case '_activity':
+        return Routes.ActivityRoom();
       default:
         if (!defaultRoute) return null;
         return defaultRoute(path);
@@ -104,6 +187,12 @@ var userRoute = function(username) {
           // it's a user
           return userRoute(follow);
         });
+      case 'chatRoomList':
+        return listRoute(Routes.ChatRoomList(username), function(room) {
+          // unsure
+            return listRoute(room);
+        });
+
       default:
         return null;
     };
@@ -114,7 +203,7 @@ var userRoute = function(username) {
 var LoggedIn = {
   parse: function(host) {
     switch (host) {
-      case 'dashboard':        
+      case 'dashboard':
         return userRoute(null);
       default:
         return null;

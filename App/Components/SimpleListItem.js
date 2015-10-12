@@ -11,6 +11,7 @@ var Text       = require('../Components/Text');
 var AppActions = require('../Actions/AppActions');
 
 var SimpleListItem = React.createClass({
+
   onSelection: function() {
     AppActions.launchRelativeItem(this.props.currentRoute, this.props);
   },
@@ -102,7 +103,7 @@ var styles = StyleSheet.create({
     flex: 1,
   },
   right: {
-    
+
   },
   rightIcon: {
     fontFamily: cssVar('fontIcon'),

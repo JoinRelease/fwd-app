@@ -7,7 +7,8 @@ var PostService = {
     return {
       id: response.id,
       content: response.content,
-      username: response.username
+      username: response.username,
+
     };
   },
 

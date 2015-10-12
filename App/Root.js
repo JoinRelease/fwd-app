@@ -29,6 +29,7 @@ function getEnvironmentState() {
 };
 
 var Root = React.createClass({
+
   mixins: [DispatcherListener],
 
   getInitialState: function() {
