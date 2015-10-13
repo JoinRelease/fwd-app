@@ -60,7 +60,7 @@ var PostList = React.createClass({
       tabItem: {
         items: [
           {
-            title: 'Posts',
+            title: 'Logs',
             replacePath: 'posts',
             selected: true,
             icon: 'ios-paper'
@@ -71,7 +71,7 @@ var PostList = React.createClass({
             icon: 'person'
           },
           {
-            title: 'Chat',
+            title: 'Messages',
             replacePath: 'chatRoomList',
             icon: 'chatboxes'
           }

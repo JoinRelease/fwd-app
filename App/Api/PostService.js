@@ -24,18 +24,25 @@ var PostService = {
   },
 
   fetchList: function(username, callback) {
-    client.get("api/posts/" + username, {}, function(error, response) {
+    client.get("/logs", {}, function(error, response) {
       var listProps = PostService.parsePosts(response);
       callback(error, listProps);
     });
   },
 
-  createPost: function(content, callback) {
-    client.post("api/posts", {content: content}, function(error, response) {
+  createFoodPost: function(content, callback) {
+    client.post("/food_logs", {content: content}, function(error, response) {
       var postProps = PostService.parsePost(response);
       callback(error, postProps);
     });
   },
+  createActivityPost: function(content, callback) {
+    client.post("/activity_logs", {content: content}, function(error, response) {
+      var postProps = PostService.parsePost(response);
+      callback(error, postProps);
+    });
+  },
+
 };
 
 module.exports = PostService;

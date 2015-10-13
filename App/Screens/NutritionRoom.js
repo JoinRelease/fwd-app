@@ -14,7 +14,7 @@ var PostList = React.createClass({
 
     return {
       store: PostListStore,
-      //navBarHidden: true,
+      navBarTitle: 'Nutrition Team',
       listProps: {
         noTap: true
       }
@@ -22,8 +22,6 @@ var PostList = React.createClass({
   },
   getListItems: function() {
     return PostListStore.get(this.getUsername());
-    // var day = this.getListDay();
-    // PostListStore.get_sorted(this.getUsername(), day);
   },
 
   isListChange: function(username) {

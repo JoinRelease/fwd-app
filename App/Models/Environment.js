@@ -17,7 +17,7 @@ Model.prototype.getApiHost = function() {
     case 'test':
       return 'http://localhost:3000';
     case 'debug':
-      return 'http://localhost:3000';
+      return 'http://api.joinrespectful.com/v1';
     default:
       throw("Unknown Environment.getApiHost: " + this.data.name);
   }

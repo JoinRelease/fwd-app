@@ -8,6 +8,8 @@ var AuthActions = {
     return function(error, data) {
       if(callback) callback(error);
 
+      console.log(data);
+
       if (!error) {
         Dispatcher.dispatch({
           actionType: AppConstants.LOGIN_USER,

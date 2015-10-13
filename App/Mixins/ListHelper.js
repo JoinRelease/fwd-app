@@ -67,7 +67,7 @@ var ListHelper = {
   },
 
   getNavBarState: function() {
-    var title = this.props.username ? this.props.username : "Forward";
+    var title = this.props.navBarTitle ? this.props.navBarTitle : "Forward";
     return { title: title };
   },
 

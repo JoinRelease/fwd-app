@@ -98,6 +98,7 @@ var HTTPClient = {
   },
 
   post: function(path, values, callback) {
+    console.log(this.url(path));
     var req = superagent.post(this.url(path));
     if (values) {
       req = req.send(values);

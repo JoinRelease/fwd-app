@@ -11,13 +11,14 @@ var FollowList = React.createClass({
   getDefaultProps: function() {
     return {
       store: FollowListStore,
+      navBarTitle: 'Follows',
       listProps: {
         nextIcon: true
       },
       segment: {
         items: [
           {
-            title: 'Posts',
+            title: 'posts',
             replacePath: 'posts'
           },
           {
@@ -30,7 +31,7 @@ var FollowList = React.createClass({
       tabItem: {
         items: [
           {
-            title: 'Posts',
+            title: 'Logs',
             replacePath: 'posts',
 
             icon: 'ios-paper'
@@ -42,7 +43,7 @@ var FollowList = React.createClass({
             icon: 'person'
           },
           {
-            title: 'Chat',
+            title: 'Messages',
             replacePath: 'chatRoomList',
             icon: 'chatboxes'
           }

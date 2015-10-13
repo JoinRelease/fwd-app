@@ -13,7 +13,7 @@ module.exports = {
   gray10: '#EBECEC',
   gray5:  '#F5F6F6',
 
-  blue50: '#23B4D2',
+  blue50: '#009688',
 
   // http://iosfonts.com/
   fontRegular: "Avenir-Book",

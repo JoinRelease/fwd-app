@@ -97,15 +97,15 @@ var styles = StyleSheet.create({
   control: {
     flex: 1,
     flexDirection: 'row',
-    borderColor: 'white',
+    borderColor: cssVar('blue50'),
     borderWidth: 1,
-    borderRadius: 4
+    borderRadius: 0
   },
   flex: {
     flex: 1
   },
   button: {
-    padding: 5,
+    padding: 0,
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
