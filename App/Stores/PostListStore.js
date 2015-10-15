@@ -1,7 +1,8 @@
 var EventEmitter = require('events').EventEmitter;
 var assign = require('object-assign');
 
-var Post         = require('../Models/Post');
+var ActivityLog  = require('../Models/ActivityLog');
+var FoodLog      = require('../Models/FoodLog');
 var Dispatcher   = require('../Dispatcher');
 var AppConstants = require('../Constants/AppConstants');
 
@@ -12,14 +13,27 @@ var _hash = {};
 
 function addModel(key, props) {
   if(!_hash[key]) _hash[key] = [];
-  var model = new Post(props);
+
+  var model;
+
+  if (props.type_of_log == 'activity')
+    model = new ActivityLog(props);
+  else if (list[i].type_of_log == 'food')
+    model = new FoodLog(props);
+
   _hash[key].unshift(model);
 }
 
 function setList(key, list) {
   var models = [];
   for(var i in list) {
-    var model = new Post(list[i]);
+
+    var model;
+    if (list[i].type_of_log == 'activity')
+      model = new ActivityLog(list[i]);
+    else if (list[i].type_of_log == 'food')
+      model = new FoodLog(list[i]);
+
     models.push(model);
   }
   _hash[key] = models;

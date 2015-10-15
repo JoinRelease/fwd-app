@@ -139,19 +139,37 @@ updateDay: function(day) {
 
   getListItems: function() {
     return PostListStore.get(this.getUsername());
-    // var day = this.getListDay();
-    // PostListStore.get_sorted(this.getUsername(), day);
   },
 
   isListChange: function(username) {
     return this.getUsername() == username;
   },
 
-  getItemProps: function(post) {
+  foodItemProps: function(log) {
     return {
-      key: post.data.id,
-      title: post.data.content
+      key: log.data.id,
+      type: log.data.type_of_log,
+      time: log.data.time, //todo: humanize time
+      heart: log.data.heart,
+      title: log.data.description
     }
+  },
+  activityItemProps: function(log) {
+    return {
+      key: log.data.id,
+      type: log.data.type_of_log,
+      time: log.data.time, //todo: humanize time
+      title: log.data.notes,
+      heart: log.data.heart,
+      name: log.data.name
+    }
+  },
+
+  getItemProps: function(log) {
+    if (log.data.type_of_log == 'activity')
+      return this.activityItemProps(log);
+    else if (log.data.type_of_log == 'food')
+      return this.foodItemProps(log);
   },
 
   reloadList: function() {
