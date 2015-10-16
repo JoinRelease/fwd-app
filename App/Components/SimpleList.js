@@ -5,9 +5,8 @@ var {
 
 var RefreshableListView = require('react-native-refreshable-listview');
 
-var SimpleListItem = require('../Components/SimpleListItem')
-var ActivityItem = require('../Components/ActivityItem');
-var FoodItem = require('../Components/FoodItem');
+var SimpleListItem = require('../Components/SimpleListItem');
+var LogItem = require('../Components/LogItem');
 
 var ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
 
@@ -26,8 +25,8 @@ var SimpleList = React.createClass({
     }
 
     var ListItem;
-    if (item.type === 'activity') ListItem = ActivityItem;
-    else if (item.type === 'food') ListItem = FoodItem;
+    if (item.type === 'activity') ListItem = LogItem;
+    else if (item.type === 'food') ListItem = LogItem;
     else ListItem = SimpleListItem;
 
     return (

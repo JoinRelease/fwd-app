@@ -13,6 +13,9 @@ module.exports = {
   gray10: '#EBECEC',
   gray5:  '#F5F6F6',
 
+
+  heartActive: '#df1f1f',
+
   blue50: '#009688',
 
   // http://iosfonts.com/

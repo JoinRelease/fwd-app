@@ -32,6 +32,7 @@
 		33083A1D1BBDF8AC00865121 /* MaterialIcons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 33083A151BBDF8AC00865121 /* MaterialIcons.ttf */; settings = {ASSET_TAGS = (); }; };
 		33083A1E1BBDF8AC00865121 /* Octicons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 33083A161BBDF8AC00865121 /* Octicons.ttf */; settings = {ASSET_TAGS = (); }; };
 		33083A1F1BBDF8AC00865121 /* Zocial.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 33083A171BBDF8AC00865121 /* Zocial.ttf */; settings = {ASSET_TAGS = (); }; };
+		333A28AC1BD05A4F00677621 /* libActivityView.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 333A289E1BD05A2F00677621 /* libActivityView.a */; };
 		3361AF181BC30C4F00016CCF /* libRNKeychain.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3361AF171BC30C3100016CCF /* libRNKeychain.a */; };
 		3361AF191BC30C5600016CCF /* libRNKeyboardEvents.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3361AF111BC30C2400016CCF /* libRNKeyboardEvents.a */; };
 		3361AF271BC30D8E00016CCF /* EnvironmentManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 3361AF261BC30D8E00016CCF /* EnvironmentManager.m */; };
@@ -109,6 +110,13 @@
 			remoteGlobalIDString = 5DBEB1501B18CEA900B34395;
 			remoteInfo = RNVectorIcons;
 		};
+		333A289D1BD05A2F00677621 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 333A28991BD05A2F00677621 /* ActivityView.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 134814201AA4EA6300B7C361;
+			remoteInfo = ActivityView;
+		};
 		3361AF101BC30C2400016CCF /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 3361AF0C1BC30C2400016CCF /* RNKeyboardEvents.xcodeproj */;
@@ -168,6 +176,7 @@
 		33083A151BBDF8AC00865121 /* MaterialIcons.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = MaterialIcons.ttf; sourceTree = "<group>"; };
 		33083A161BBDF8AC00865121 /* Octicons.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Octicons.ttf; sourceTree = "<group>"; };
 		33083A171BBDF8AC00865121 /* Zocial.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Zocial.ttf; sourceTree = "<group>"; };
+		333A28991BD05A2F00677621 /* ActivityView.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = ActivityView.xcodeproj; path = "../node_modules/react-native-activity-view/ActivityView.xcodeproj"; sourceTree = "<group>"; };
 		3361AF0C1BC30C2400016CCF /* RNKeyboardEvents.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RNKeyboardEvents.xcodeproj; path = "../node_modules/react-native-keyboardevents/RNKeyboardEvents.xcodeproj"; sourceTree = "<group>"; };
 		3361AF121BC30C3100016CCF /* RNKeychain.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RNKeychain.xcodeproj; path = "../node_modules/react-native-keychain/RNKeychain.xcodeproj"; sourceTree = "<group>"; };
 		3361AF261BC30D8E00016CCF /* EnvironmentManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = EnvironmentManager.m; path = fwd/EnvironmentManager.m; sourceTree = "<group>"; };
@@ -190,6 +199,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				333A28AC1BD05A4F00677621 /* libActivityView.a in Frameworks */,
 				3361AF191BC30C5600016CCF /* libRNKeyboardEvents.a in Frameworks */,
 				3361AF181BC30C4F00016CCF /* libRNKeychain.a in Frameworks */,
 				33083A001BBDF31A00865121 /* libRNVectorIcons.a in Frameworks */,
@@ -330,6 +340,14 @@
 			path = "../node_modules/react-native-vector-icons/Fonts";
 			sourceTree = "<group>";
 		};
+		333A289A1BD05A2F00677621 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				333A289E1BD05A2F00677621 /* libActivityView.a */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
 		3361AF0D1BC30C2400016CCF /* Products */ = {
 			isa = PBXGroup;
 			children = (
@@ -357,6 +375,7 @@
 		832341AE1AAA6A7D00B99B32 /* Libraries */ = {
 			isa = PBXGroup;
 			children = (
+				333A28991BD05A2F00677621 /* ActivityView.xcodeproj */,
 				3361AF121BC30C3100016CCF /* RNKeychain.xcodeproj */,
 				3361AF0C1BC30C2400016CCF /* RNKeyboardEvents.xcodeproj */,
 				330839FA1BBDF25A00865121 /* RNVectorIcons.xcodeproj */,
@@ -494,6 +513,10 @@
 			projectDirPath = "";
 			projectReferences = (
 				{
+					ProductGroup = 333A289A1BD05A2F00677621 /* Products */;
+					ProjectRef = 333A28991BD05A2F00677621 /* ActivityView.xcodeproj */;
+				},
+				{
 					ProductGroup = 00C302A81ABCB8CE00DB3ED1 /* Products */;
 					ProjectRef = 00C302A71ABCB8CE00DB3ED1 /* RCTActionSheet.xcodeproj */;
 				},
@@ -616,6 +639,13 @@
 			fileType = archive.ar;
 			path = libRNVectorIcons.a;
 			remoteRef = 330839FE1BBDF25B00865121 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		333A289E1BD05A2F00677621 /* libActivityView.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libActivityView.a;
+			remoteRef = 333A289D1BD05A2F00677621 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
 		3361AF111BC30C2400016CCF /* libRNKeyboardEvents.a */ = {

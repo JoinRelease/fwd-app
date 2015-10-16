@@ -149,9 +149,9 @@ updateDay: function(day) {
     return {
       key: log.data.id,
       type: log.data.type_of_log,
-      time: log.data.time, //todo: humanize time
+      time: log.data.time,
       heart: log.data.heart,
-      title: log.data.description
+      description: log.data.description
     }
   },
   activityItemProps: function(log) {
@@ -159,9 +159,10 @@ updateDay: function(day) {
       key: log.data.id,
       type: log.data.type_of_log,
       time: log.data.time, //todo: humanize time
-      title: log.data.notes,
+      description: log.data.notes,
       heart: log.data.heart,
-      name: log.data.name
+      name: log.data.name,
+      intensity: log.data.intensity
     }
   },
 
