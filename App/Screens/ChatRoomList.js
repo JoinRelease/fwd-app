@@ -2,16 +2,16 @@ var React = require('react-native');
 
 var ListHelper = require('../Mixins/ListHelper');
 
-var FollowListStore = require('../Stores/FollowListStore');
-var ChatListStore = require('../Stores/ChatListStore')
-var FollowActions   = require('../Actions/FollowActions');
 
-var FollowList = React.createClass({
+var ChatListStore = require('../Stores/ChatListStore');
+
+
+var ChatRoomList = React.createClass({
   mixins: [ListHelper],
 
   getDefaultProps: function() {
     return {
-      store: FollowListStore,
+      store: ChatListStore,
       navBarTitle: 'Messages',
       listProps: {
         nextIcon: true
@@ -20,7 +20,7 @@ var FollowList = React.createClass({
         items: [
           {
             title: 'Logs',
-            replacePath: 'posts',
+            replacePath: 'logs',
             icon: 'ios-paper'
           },
           {
@@ -79,16 +79,10 @@ var FollowList = React.createClass({
   },
 
   reloadList: function() {
-    console.log("reloading follows: " + this.getUsername());
-    FollowActions.fetchList(this.getUsername(), function(error) {
-      // TODO: handle error
-      if (error) {
-        alert(error.message);
-      }
-    });
+    // TODO: Maybe get rooms w/ notifications from server?
   }
 });
 
 
 
-module.exports = FollowList;
+module.exports = ChatRoomList;

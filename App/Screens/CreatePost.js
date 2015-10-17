@@ -1,7 +1,9 @@
 var React = require('react-native');
 var {
   View,
-  StyleSheet
+  StyleSheet,
+  Text,
+  TouchableHighlight
 } = React;
 
 var TextInput   = require('../Components/TextInput');
@@ -10,13 +12,15 @@ var PostActions = require('../Actions/PostActions');
 var AppActions  = require('../Actions/AppActions');
 
 var KeyboardListener = require('../Mixins/KeyboardListener');
+var Camera = require('react-native-camera');
 
 var CreatePost = React.createClass({
   mixins: [KeyboardListener],
 
   getInitialState: function() {
     return {
-      content: ''
+      content: '',
+      cameraType: Camera.constants.Type.back
     };
   },
 
@@ -34,27 +38,43 @@ var CreatePost = React.createClass({
 
   render: function() {
     return (
-      <View style={styles.flex}>
-        <TextInput ref="content"
-          placeholder={"What do you have to say for yourself?"}
-          keyboardType="default"
-          multiline={true}
-          autoFocus={true}
-          style={styles.input}
-          enablesReturnKeyAutomatically={true}
-          returnKeyType='done'
-          onChange={(event) => this.state.content = event.nativeEvent.text }
-        />
-        <View style={styles.footer}>
-          <View style={styles.flex} />
-          <Button type='blue' style={styles.button} onPress={this.onSubmitButton}>
-            Submit
-          </Button>
-        </View>
-        <View style={{height: this.state.keyboardSpace}}></View>
-      </View>
+      <Camera
+        ref="cam"
+        style={styles.container}
+        type={this.state.cameraType}
+      >
+        <Text style={styles.welcome}>
+          Welcome to React Native!
+        </Text>
+        <Text style={styles.instructions}>
+          To get started, edit index.ios.js{'\n'}
+          Press Cmd+R to reload
+        </Text>
+        <TouchableHighlight onPress={this._switchCamera}>
+          <Text>The old switcheroo</Text>
+        </TouchableHighlight>
+        <TouchableHighlight onPress={this._takePicture}>
+          <Text>Take Picture</Text>
+        </TouchableHighlight>
+      </Camera>
     );
+  },
+
+  _onBarCodeRead: function(e) {
+    console.log(e);
+  },
+  _switchCamera: function() {
+    var state = this.state;
+    state.cameraType = state.cameraType === Camera.constants.Type.back
+      ? Camera.constants.Type.front : Camera.constants.Type.back;
+    this.setState(state);
+  },
+  _takePicture: function() {
+    this.refs.cam.capture(function(err, data) {
+      console.log(err, data);
+    });
   }
+
 });
 
 var styles = StyleSheet.create({
@@ -73,7 +93,23 @@ var styles = StyleSheet.create({
   footer: {
     padding: 10,
     flexDirection: 'row'
-  }
+  },
+
+  container: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: 'transparent',
+  },
+  welcome: {
+    fontSize: 20,
+    textAlign: 'center',
+    margin: 10,
+  },
+  instructions: {
+    textAlign: 'center',
+    color: 'white',
+  },
 });
 
 module.exports = CreatePost;

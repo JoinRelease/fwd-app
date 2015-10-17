@@ -11,6 +11,7 @@ var {
 var cssVar     = require('../Lib/cssVar');
 var Text       = require('../Components/Text');
 var AppActions = require('../Actions/AppActions');
+var Routes     = require('../Navigation/Routes')
 var TabBarIOS = require('TabBarIOS');
 var Icon = require('react-native-vector-icons/Ionicons');
 var TabBarItemIOS = Icon.TabBarItem;
@@ -39,8 +40,17 @@ var TabbedControl = React.createClass({
 
 var TabItem = React.createClass({
 
-  onSelection: function() {
-    AppActions.launchNavItem(this.props.currentRoute, this.props);
+  getInitialState: function() {
+    return {
+      selectedTab: 1
+    };
+  },
+
+  _renderContent: function() {
+      if (this.state.selectedTab === 1){
+
+      }
+    //AppActions.launchRelativeItem(this.props.currentRoute, this.props);
   },
 
   render: function() {
@@ -49,10 +59,14 @@ var TabItem = React.createClass({
         iconName= {this.props.icon}
         selectedIconName={this.props.icon}
         title = {this.props.title}
-        selected = {this.props.selected}
-        onPress={this.onSelection}
-      >
-      {this.props.content}
+        selected = {this.state.selectedTab}
+        onPress={() => {
+          this.setState({
+            selectedTab: this.props.title
+          })
+
+      }}>
+        {this._renderContent(this.props.title)}
       </TabBarItemIOS>
     );
   }

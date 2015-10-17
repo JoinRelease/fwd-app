@@ -34,7 +34,19 @@ var ListHelper = {
   },
 
   getListState: function() {
-    var week = (typeof this.getDefaultWeek == 'function') ? this.getDefaultWeek() : null;
+    var week;
+    if (typeof this.getDefaultWeek == 'function'){
+      if (this.state){
+        week = this.state.week;
+      }
+      else {
+        week = this.getDefaultWeek();
+      }
+    }
+     else {
+       week = null;
+     }
+    var day = (week === null) ? null : week.day;
     return {
       items: this.getListItems(),
       week: week
@@ -82,10 +94,21 @@ var ListHelper = {
   sortItems: function() {
     if (this.state.week) {
       items = this.state.items;
-      day = this.state.day
-      // todo: sort items by day of week
+      day = this.state.week.day;
+
+      //console.log(this.state.items);
+
+      var filteredList = [];
+      for (var i in items) {
+        var d = new Date(items[i].data.time);
+        if (d.getDay() === day) {
+
+          filteredList.push(items[i])
+        }
+      };
+      return filteredList;
     }
-    return this.state.items
+    return this.state.items;
   },
 
 

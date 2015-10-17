@@ -23,13 +23,6 @@ var AppActions = {
     });
   },
 
-  hideNavBar: function() {
-    console.log('Hiding navbar')
-    Dispatcher.dispatch({
-      actionType: AppConstants.HIDE_NAVBAR
-    })
-  },
-
   launchExternalURL: function(url) {
     console.log("Launching! " + url);
     Dispatcher.dispatch({

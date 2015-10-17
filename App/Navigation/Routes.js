@@ -16,13 +16,21 @@ var Routes = {
     };
   },
 
-  PostList: function(username) {
+  LogList: function(username) {
     return {
-      component: require('../Screens/PostList'),
+      component: require('../Screens/LogList'),
       title: '', // set to name
       passProps: {
         username: username
-      }
+      },
+      navRight: {
+        subPath: '_post',
+        label: '+A' // TODO: icon font
+      },
+      navLeft: {
+        subPath: '_post',
+        label: '+F' // TODO: icon font
+      },
     };
   },
 
@@ -38,16 +46,9 @@ var Routes = {
   ChatRoomList: function(name) {
     return {
       component: require('../Screens/ChatRoomList'),
-      Title: ''
+      Title: '',
     }
   },
-  ChatRoom: function(name) {
-    return {
-      component: require('../Screens/ChatRoom'),
-      title: name
-    }
-  },
-
   Settings: function() {
     return {
       component: require('../Screens/Settings'),
@@ -122,64 +123,32 @@ var listRoute = function(route, defaultRoute) {
     }
   }
 
-  if(!route.navRight) {
-    route.navRight = {
-      subPath: '_post',
-      label: '+' // TODO: icon font
-    };
-  }
+  // if(!route.navRight) {
+  //   route.navRight = {
+  //     subPath: '_post',
+  //     label: '+' // TODO: icon font
+  //   };
+  // }
 
-  if(!route.navLeft && !username) {
-    route.navLeft = {
-      subPath: '_settings',
-      label: 'Me' // TODO: icon font
-    };
-  }
-  return route;
-};
-
-var chatRoomRoute = function(route, defaultRoute) {
-  var name = route.passProps ? route.passProps.name : null;
-  route.parse = function(path) {
-    switch(path) {
-      case '_nutrition':
-        return Routes.NutritionRoom();
-      case '_cooking':
-        return Routes.CookingRoom();
-      case '_activity':
-        return Routes.ActivityRoom();
-      default:
-        if (!defaultRoute) return null;
-        return defaultRoute(path);
-    }
-  }
-
-  if(!route.navRight) {
-    route.navRight = {
-      subPath: '_post',
-      label: '+' // TODO: icon font
-    };
-  }
-
-  if(!route.navLeft && !username) {
-    route.navLeft = {
-      subPath: '_settings',
-      label: 'Me' // TODO: icon font
-    };
-  }
+  // if(!route.navLeft && !username) {
+  //   route.navLeft = {
+  //     subPath: '_settings',
+  //     label: 'Me' // TODO: icon font
+  //   };
+  // }
   return route;
 };
 
 var userRoute = function(username) {
   var route = {}
   route._notAddressable = true;
-  route._routerAppend = 'posts';
+  route._routerAppend = 'logs';
 
   route.parse = function(path) {
     switch(path) {
-      case 'posts':
-        return listRoute(Routes.PostList(username), function(postId) {
-          // TOOD: show post
+      case 'logs':
+        return listRoute(Routes.LogList(username), function(postId) {
+          // TOOD: show log view?
           return null;
         });
       case 'follows':
@@ -199,6 +168,7 @@ var userRoute = function(username) {
   };
   return route;
 };
+
 
 var LoggedIn = {
   parse: function(host) {

@@ -6,7 +6,7 @@ var PostListStore = require('../Stores/PostListStore');
 var PostActions   = require('../Actions/PostActions');
 
 
-var PostList = React.createClass({
+var LogList = React.createClass({
   mixins: [ListHelper],
 
   getDefaultWeek: function() {
@@ -61,7 +61,7 @@ var PostList = React.createClass({
         items: [
           {
             title: 'Logs',
-            replacePath: 'posts',
+            replacePath: 'logs',
             selected: true,
             icon: 'ios-paper'
           },
@@ -82,59 +82,68 @@ var PostList = React.createClass({
   },
 
 updateDay: function(day) {
-  var weekdays = {
-    "Sun": 0,
-    "Mon": 1,
-    "Tue": 2,
-    "Wed": 3,
-    "Thu": 4,
-    "Fri": 5,
-    "Sat": 6
-  };
-  var today = weekdays[day];
+
+  var day = this.getDayNumber(day);
     this.setState({
       week: {
         items: [
           {
             title: 'Sun',
-            selected: day === 'Sun'
+            selected: day === 0
           },
           {
             title: 'Mon',
-            selected: day === 'Mon'
+            selected: day === 1
           },
           {
             title: 'Tue',
-            selected: day === 'Tue'
+            selected: day === 2
           },
           {
             title: 'Wed',
-            selected: day === 'Wed'
+            selected: day === 3
           },
           {
             title: 'Thu',
-            selected: day === 'Thu'
+            selected: day === 4
           },
           {
             title: 'Fri',
-            selected: day === 'Fri'
+            selected: day === 5
           },
           {
             title: 'Sat',
-            selected: day === 'Sat'
+            selected: day === 6
           }
         ],
-        day: today
+        day: day
       }
     });
   },
 
+  getDayNumber: function(day) {
+    var weekdays = {
+      "Sun": 0,
+      "Mon": 1,
+      "Tue": 2,
+      "Wed": 3,
+      "Thu": 4,
+      "Fri": 5,
+      "Sat": 6
+    };
+  return weekdays[day];
+  },
+
   getListDay: function() {
-    console.log(this.state);
     var wkitems = this.state.week.items;
       for (var i in wkitems){
         if (wkitems[i].selected) return wkitems[i].title;
     }
+  },
+
+  filterList: function(list, day) {
+
+    return filteredList;
   },
 
   getListItems: function() {
@@ -158,7 +167,7 @@ updateDay: function(day) {
     return {
       key: log.data.id,
       type: log.data.type_of_log,
-      time: log.data.time, //todo: humanize time
+      time: log.data.time,
       description: log.data.notes,
       heart: log.data.heart,
       name: log.data.name,
@@ -186,4 +195,4 @@ updateDay: function(day) {
 
 
 
-module.exports = PostList;
+module.exports = LogList;

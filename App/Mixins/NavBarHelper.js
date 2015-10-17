@@ -9,14 +9,14 @@ var NavBarHelper = {
   mixins: [TimerMixin],
 
   componentDidMount: function() {
-    this.updateNavTitle();
-  },
-  
-  componentDidUpdate: function() {
-    this.updateNavTitle();
+    this.updateNavComponents();
   },
 
-  updateNavTitle: function() {
+  componentDidUpdate: function() {
+    this.updateNavComponents();
+  },
+
+  updateNavComponents: function() {
     var updates = this.getNavBarState();
     if (!updates) return;
 
@@ -29,7 +29,7 @@ var NavBarHelper = {
     if (typeof updates.navRightIcon !== "undefined") {
       this.props.currentRoute.navRight.icon = updates.navRightIcon;
     }
-    
+
     // if called during componentDidLoad, nav bar not loaded yet
     // requestAnimationFrame to allow it to finish
     var route = this.props.currentRoute;

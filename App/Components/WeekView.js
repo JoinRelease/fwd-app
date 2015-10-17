@@ -53,7 +53,6 @@ var WeekView = React.createClass({
 var DayItem = React.createClass({
 
   onSelection: function() {
-    // AppActions.launchRelativeItem(this.props.currentRoute, this.props);
     this.props.updateDay(this.props.title);
   },
 

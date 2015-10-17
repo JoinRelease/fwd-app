@@ -38,7 +38,7 @@ var Container = React.createClass({
         style={[styles.scene, this.props.navBarHidden && styles.sceneHidden]}
         ref={this.props.onLoadedScene}
       >
-      {statBar}
+
         <Component ref="mainComponent"
           navigator={this.props.navigator}
           currentRoute={this.props.route}

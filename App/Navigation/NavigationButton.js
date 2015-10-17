@@ -65,7 +65,7 @@ var NavigationButton = React.createClass({
   },
 
   renderRight: function() {
-    var route = this.state.updatedRoute || this.props.route;
+    var route = this.props.route || this.state.updatedRoute;
     if (!route.navRight) return null;
 
     return this.makeButton(route.navRight, styles.navBarRightButton, function() {
@@ -74,7 +74,7 @@ var NavigationButton = React.createClass({
   },
 
   renderLeft: function() {
-    var route = this.state.updatedRoute || this.props.route;
+    var route = this.props.route || this.state.updatedRoute;
     if (route.navLeft && !route.navBack) {
       return this.makeButton(route.navLeft, styles.navBarLeftButton, function() {
         AppActions.launchNavItem(route, route.navLeft);

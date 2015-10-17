@@ -46,6 +46,7 @@ var SimpleList = React.createClass({
         dataSource={ds.cloneWithRows(this.props.items)}
         renderRow={this.renderRow}
         loadData={this.props.reloadList}
+        minBetweenTime={2000}
         refreshDescription="Working Some Magic"
       />
     );
