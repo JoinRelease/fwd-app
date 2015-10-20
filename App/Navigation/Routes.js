@@ -28,8 +28,8 @@ var Routes = {
         label: '+A' // TODO: icon font
       },
       navLeft: {
-        subPath: '_post',
-        label: '+F' // TODO: icon font
+        subPath: '_settings',
+        label: 'S' // TODO: icon font
       },
     };
   },

@@ -31,7 +31,7 @@ var styles = React.StyleSheet.create({
     padding: 10,
     fontFamily: cssVar('fontRegular'),
     color: cssVar('gray90'),
-    fontSize: 8                           // make it small to know it's not set
+    fontSize: 8        // make it small to know it's not set
   }
 });
 

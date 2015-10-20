@@ -13,8 +13,8 @@ var ChatList = React.createClass({
 
     return {
       store: ChatListStore,
-      room_id: 1,
-      navBarTitle: 'Nutrition Team',
+      room_id: 2,
+      navBarTitle: 'Cooking Hotline',
       listProps: {
         noTap: true
       }

@@ -23,8 +23,11 @@ var Text             = require('../Components/Text');
 var WeekView         = require('../Components/WeekView');
 var TabbedControl    = require('../Components/TabbedControl');
 var SegmentedControl    = require('../Components/SegmentedControl');
-var SimpleList       = require('../Components/SimpleList');
-var AppActions       = require('../Actions/AppActions')
+var InvertedList       = require('../Components/InvertedList');
+var AppActions       = require('../Actions/AppActions');
+
+var ChatInput = require('../Components/ChatInput');
+
 
 var ChatHelper = {
   mixins: [NavigationListener, NavBarHelper],
@@ -79,23 +82,13 @@ var ChatHelper = {
   },
 
 
-  sortItems: function() {
-    if (this.state.week) {
-      items = this.state.items;
-      day = this.state.day
-      // todo: sort items by day of week
-    }
-    return this.state.items
-  },
-
-
   renderItems: function() {
     return (
-      <SimpleList
+      <InvertedList
         style={styles.flex}
         currentRoute={this.props.currentRoute}
         getItemProps={this.getItemProps}
-        items={this.sortItems()}
+        items={this.state.items}
         reloadList={this.reloadList}
         {...this.props.listProps}
       />
@@ -112,42 +105,18 @@ var ChatHelper = {
     );
   },
 
-  renderHeader: function() {
-    if (this.props.segment) {
-      return (
-        <SegmentedControl currentRoute={this.props.currentRoute} {...this.props.segment} />
-      );
-    }
-    else if(this.state.week) {
-      return (
-        <WeekView currentRoute={this.props.currentRoute} {...this.state.week} updateDay={this.updateDay} />
-      );
-    }
-  },
-
-  renderTabs: function(content) {
-    if (!this.props.tabItem) return null;
-    return (
-      <TabbedControl currentRoute={this.props.currentRoute} {...this.props.tabItem} content={content}/>
-    );
-  },
-
   renderContent: function() {
-    var header = this.renderHeader();
-
     var content;
-    var empty;
     if (this.state.items.length === 0) {
       content = this.renderEmpty();
     }
     else {
       content = this.renderItems();
     }
-    var tabs = this.renderTabs(content);
-    var header = this.renderHeader();
     return (
       <View style={styles.flex}>
         {content}
+        <ChatInput />
       </View>
     );
   },
@@ -178,6 +147,22 @@ var styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     backgroundColor: '#123456',
+  },
+  flex: {
+    flex: 1
+  },
+  input: {
+    flex: 1,
+    fontSize: 16,
+    backgroundColor: 'white',
+    padding: 20
+  },
+  button: {
+    // width: 150
+  },
+  footer: {
+    padding: 10,
+    flexDirection: 'row'
   }
 });
 

@@ -1,7 +1,7 @@
 var EventEmitter = require('events').EventEmitter;
 var assign = require('object-assign');
 
-var ChatRoom     = require('../Models/ChatRoom');
+var ChatMessage     = require('../Models/ChatMessage');
 var Dispatcher   = require('../Dispatcher');
 var AppConstants = require('../Constants/AppConstants');
 
@@ -13,7 +13,7 @@ var _hash = {};
 function setList(key, list) {
   var models = [];
   for(var i in list) {
-    var model = new ChartRoom(list[i]);
+    var model = new ChatMessage(list[i]);
     models.push(model);
   }
   _hash[key] = models;
@@ -40,9 +40,9 @@ var ModelStore = assign({}, EventEmitter.prototype, {
 // Register callback to handle all updates
 Dispatcher.register(function(action) {
   switch(action.actionType) {
-    case AppConstants.CHATROOM_LIST_UPDATED:
-      setList(action.listProps.username, action.listProps.chatRooms);
-      ModelStore.emitChange(action.listProps.username);
+    case AppConstants.CHAT_LIST_UPDATED:
+      setList(action.listProps.room_id, action.listProps.messages);
+      ModelStore.emitChange(action.listProps.room_id);
       break;
     // TODO: save
     default:

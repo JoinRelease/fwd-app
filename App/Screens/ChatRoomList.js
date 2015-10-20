@@ -24,11 +24,6 @@ var ChatRoomList = React.createClass({
             icon: 'ios-paper'
           },
           {
-            title: 'Follows',
-            replacePath: 'follows',
-            icon: 'person'
-          },
-          {
             title: 'Messages',
             replacePath: 'chatRoomList',
             selected: true,
