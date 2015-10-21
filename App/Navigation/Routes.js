@@ -58,7 +58,7 @@ var Routes = {
 
   CreatePost: function() {
     return {
-      component: require('../Screens/CreatePost'),
+      component: require('../Screens/TakePicture'),
       title: 'New Post',
       navBack: {
         label: 'Cancel'

@@ -1,15 +1,10 @@
 var React = require('react-native');
 var {
   View,
-  StyleSheet,
-  Text,
-  TouchableHighlight
+  StyleSheet
 } = React;
 
-var TextInput   = require('../Components/TextInput');
-var Button      = require('../Components/Button');
-var PostActions = require('../Actions/PostActions');
-var AppActions  = require('../Actions/AppActions');
+var Camera = require('react-native-camera');
 
 var KeyboardListener = require('../Mixins/KeyboardListener');
 

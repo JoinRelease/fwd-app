@@ -136,11 +136,6 @@ updateDay: function(day) {
     }
   },
 
-  filterList: function(list, day) {
-
-    return filteredList;
-  },
-
   getListItems: function() {
     return PostListStore.get(this.getUsername());
   },
@@ -155,7 +150,8 @@ updateDay: function(day) {
       type: log.data.type_of_log,
       time: log.data.time,
       heart: log.data.heart,
-      description: log.data.description
+      description: log.data.description,
+      comments: log.data.comments
     }
   },
   activityItemProps: function(log) {
@@ -166,7 +162,8 @@ updateDay: function(day) {
       description: log.data.notes,
       heart: log.data.heart,
       name: log.data.name,
-      intensity: log.data.intensity
+      intensity: log.data.intensity,
+      comments: log.data.comments
     }
   },
 

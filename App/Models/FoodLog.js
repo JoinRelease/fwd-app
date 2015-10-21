@@ -15,7 +15,9 @@ Model.prototype.setAttributes = function(options) {
     description: options.description,
     heart: options.heart,
     created_at: options.created_at,
-    updated_at: options.updated_at
+    updated_at: options.updated_at,
+
+    comments: options.comments
   });
 };
 

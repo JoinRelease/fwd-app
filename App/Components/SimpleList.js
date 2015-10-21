@@ -34,10 +34,6 @@ var SimpleList = React.createClass({
     );
   },
 
-  onPress: function() {
-    this.props.hideNavBar()
-  },
-
   render: function() {
     var Component = this.props.reloadList ? RefreshableListView : ListView;
     return (

@@ -86,8 +86,46 @@ var HTTPClient = {
     return req;
   },
 
+
+  addFormDataHeaders: function(req) {
+    // TODO: load version from somewhere
+    var appVersion = "1.0";
+    var userAgent = "Fwd iPhone v" + appVersion;
+    var locale = 'en-US';
+
+    req = req.accept('multipart/form-data');
+    req = req.type('multipart/form-data');
+    req = req.set('User-Agent', userAgent);
+    req = req.set('X-CLIENT-VERSION', appVersion);
+    req = req.set('X-Fwd-User-Agent', userAgent);
+    req = req.set('X-LOCALE', locale);
+
+    var currentUser = CurrentUserStore.get();
+    if (currentUser && currentUser.getToken()) {
+      req = req.set('Authorization', 'Bearer ' + currentUser.getToken());
+    }
+
+    // if (currentUser && currentUser.data.guid) {
+    //   req = req.set('X-GUID', currentUser.data.guid);
+    // }
+    // if (currentUser && currentUser.data.ab_decision_group_id) {
+    //   req = req.set('X-AB-DECISION-GROUP-ID', currentUser.data.ab_decision_group_id.toString());
+    // }
+    // if (currentUser && currentUser.data.ab_decision) {
+    //   req = req.set('X-AB-DECISION', currentUser.data.ab_decision);
+    // }
+
+    return req;
+  },
+
   fetch: function(req, callback) {
     req = this.addHeaders(req);
+    Network.started();
+    req.end(this.wrapper(callback));
+  },
+
+  fetchFormData: function(req, callback) {
+    req = this.addFormDataHeaders(req);
     Network.started();
     req.end(this.wrapper(callback));
   },
@@ -106,6 +144,32 @@ var HTTPClient = {
     this.fetch(req, callback);
   },
 
+  postImage: function(path, values, callback) {
+    console.log(this.url(path));
+    var req = superagent.post(this.url(path));
+    if (values) {
+      req = req.send(values);
+    }
+    this.fetch(req, callback);
+  },
+
+  postFormData: function(path, data, callback) {
+    var req = superagent.post(this.url(path));
+    var formData = new FormData();
+    console.log(data);
+    if (data) {
+
+      formData.append('image', data.image);
+      req = req.send(formData);
+    }
+    this.fetchFormData(req, callback);
+  },
+
+  del: function(path, callback) {
+    var req = superagent.delete(this.url(path));
+    this.fetch(req, callback);
+  },
+
   put: function(path, values, callback) {
     var req = superagent.put(this.url(path));
     if (values) {
@@ -113,7 +177,6 @@ var HTTPClient = {
     }
     this.fetch(req, callback);
   },
-
 
   get: function(path, params, callback) {
     var req = superagent.get(this.url(path));

@@ -12,7 +12,9 @@ var PostService = {
       description: response.description,
       heart: response.heart,
       created_at: response.created_at,
-      updated_at: response.updated_at
+      updated_at: response.updated_at,
+
+      comments: response.comments
 
     };
   },
@@ -29,7 +31,9 @@ var PostService = {
       notes: response.notes,
       heart: response.heart,
       created_at: response.created_at,
-      updated_at: response.updated_at
+      updated_at: response.updated_at,
+
+      comments: response.comments,
 
     };
   },
@@ -58,14 +62,14 @@ var PostService = {
     });
   },
 
-  createFoodPost: function(content, callback) {
-    client.post("/food_logs", {content: content}, function(error, response) {
+  createFoodLog: function(content, callback) {
+    client.postFormData("/food_logs", content, function(error, response) {
       var postProps = PostService.parseFoodLog(response);
       callback(error, postProps);
     });
   },
-  createActivityPost: function(content, callback) {
-    client.post("/activity_logs", {content: content}, function(error, response) {
+  createActivityLog: function(content, callback) {
+    client.post("/activity_logs", content, function(error, response) {
       var postProps = PostService.parseActivityLog(response);
       callback(error, postProps);
     });

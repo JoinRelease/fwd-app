@@ -4,6 +4,7 @@ var {
   StyleSheet,
   TouchableHighlight,
   TouchableOpacity,
+  ListView,
   Image
 } = React;
 
@@ -14,8 +15,12 @@ var CurrentUserStore = require('../Stores/CurrentUserStore');
 var Text       = require('../Components/Text');
 var Icon = require('react-native-vector-icons/Ionicons');
 var AppActions = require('../Actions/AppActions');
+var CommentItem = require('../Components/CommentItem');
 
 var ActivityView = require('react-native-activity-view');
+
+var ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
+
 
 var LogItem = React.createClass({
 
@@ -121,6 +126,26 @@ var LogItem = React.createClass({
 
   },
 
+  renderCommentRow: function(item, sectionId, rowId) {
+
+    return (
+      <CommentItem {...item} key={'item'+ (item.key || rowId)}/>
+    )
+  },
+
+  renderComments: function() {
+    return (
+      <ListView
+        automaticallyAdjustContentInsets={true}
+        dataSource={ds.cloneWithRows(this.props.comments)}
+        renderRow={this.renderCommentRow}
+        bounces={false}
+        scrollEnabled={false}
+      />
+    );
+
+  },
+
   renderRightIcon: function() {
     if (!this.props.nextIcon) return null;
 
@@ -140,6 +165,7 @@ var LogItem = React.createClass({
           {this.renderImage()}
           {this.renderActions()}
           {this.renderDescription()}
+          {this.renderComments()}
         </View>
         <View style={styles.right}>
           {this.renderRightIcon()}

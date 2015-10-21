@@ -26,7 +26,29 @@ var PostActions = {
         });
       }
     });
-  }
+  },
+  createActivityLog: function(content, callback) {
+    PostService.createActivityLog(content, function(error, postProps) {
+      if (callback) callback(error);
+      if (!error) {
+        Dispatcher.dispatch({
+          actionType: AppConstants.POST_ADDED,
+          postProps: postProps
+        });
+      }
+    });
+  },
+  createFoodLog: function(content, callback) {
+    PostService.createFoodLog(content, function(error, postProps) {
+      if (callback) callback(error);
+      if (!error) {
+        Dispatcher.dispatch({
+          actionType: AppConstants.POST_ADDED,
+          postProps: postProps
+        });
+      }
+    });
+  },
 };
 
 module.exports = PostActions;
