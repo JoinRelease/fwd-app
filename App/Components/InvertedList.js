@@ -7,8 +7,7 @@ var RefreshableListView = require('react-native-refreshable-listview');
 
 var InvertibleScrollView = require('react-native-invertible-scroll-view');
 
-var SimpleListItem = require('../Components/SimpleListItem');
-var LogItem = require('../Components/LogItem');
+var ChatItem = require('../Components/ChatItem');
 
 var ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
 
@@ -26,10 +25,7 @@ var InvertedList = React.createClass({
       item = this.props.getItemProps(item);
     }
 
-    var ListItem;
-    if (item.type === 'activity') ListItem = LogItem;
-    else if (item.type === 'food') ListItem = LogItem;
-    else ListItem = SimpleListItem;
+    var ListItem = ChatItem;
 
     return (
       <ListItem {...passAlong} {...item} key={"item" + (item.key || rowId)} />
@@ -45,7 +41,7 @@ var InvertedList = React.createClass({
     return (
       <Component
         automaticallyAdjustContentInsets={true}
-        renderScrollComponent={props => (<InvertibleScrollView {...props} inverted />)}
+        renderScrollComponent={(props) => (<InvertibleScrollView {...props} inverted />)}
         dataSource={ds.cloneWithRows(this.props.items)}
         renderRow={this.renderRow}
         loadData={this.props.reloadList}

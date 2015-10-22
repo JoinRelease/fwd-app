@@ -12,5 +12,6 @@ module.exports = keyMirror({
   POST_LIST_UPDATED: null,
   POST_ADDED: null,
   CHAT_LIST_UPDATED: null,
-  HIDE_NAVBAR: null
+  HIDE_NAVBAR: null,
+  MESSAGE_ADDED: null
 });

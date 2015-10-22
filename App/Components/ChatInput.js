@@ -6,8 +6,9 @@ var {
 
 var TextInput   = require('../Components/TextInput');
 var Button      = require('../Components/Button');
-var PostActions = require('../Actions/PostActions');
+var ChatActions = require('../Actions/ChatActions');
 var AppActions  = require('../Actions/AppActions');
+var CurrentUserStore = require('../Stores/CurrentUserStore');
 
 var KeyboardListener = require('../Mixins/KeyboardListener');
 
@@ -15,9 +16,30 @@ var ChatInput = React.createClass({
   mixins: [KeyboardListener],
 
   getInitialState: function() {
+    return this.blankContent();
+  },
+
+  blankContent: function() {
     return {
-      content: ''
+      content: {
+        body: '',
+        user_id: CurrentUserStore.get().data.id,
+        room: 1,
+        answered: true,
+      }
     };
+  },
+
+  updateText: function(text) {
+    this.setState({content: {
+      body: text,
+      user_id: this.state.content.user_id,
+      room: this.state.content.room,
+      answered: this.state.content.answered
+    }});
+  },
+  clearText: function() {
+    this.setState(this.blankContent);
   },
 
   onSubmitButton: function() {
@@ -27,7 +49,8 @@ var ChatInput = React.createClass({
         alert(error.message);
       }
       else {
-        AppActions.goBack(this.props.navigator);
+        this.props.messageAdded();
+        this.clearText();
       }
     }.bind(this));
   },
@@ -37,8 +60,8 @@ var ChatInput = React.createClass({
       <View>
         <View style={styles.footer}>
           <View style={styles.inputContainer}>
-            <TextInput ref="content"
-            placeholder={"What do you have to say for yourself?"}
+            <TextInput ref="message"
+            placeholder={"Add a Message..."}
             keyboardType="default"
             multiline={true}
             clearTextOnFocus={true}
@@ -46,8 +69,9 @@ var ChatInput = React.createClass({
             autoFocus={false}
             style={styles.input}
             enablesReturnKeyAutomatically={true}
-            returnKeyType='send'
-            onChange={(event) => this.state.content = event.nativeEvent.text }
+            returnKeyType={'send'}
+            onChangeText={this.updateText}
+            value={this.state.content.body}
             />
           </View>
           <View style={styles.inputButton} />
@@ -63,8 +87,8 @@ var ChatInput = React.createClass({
 var styles = StyleSheet.create({
   input: {
     backgroundColor: 'white',
-    fontSize: 16,
-    padding: 15,
+    fontSize: 14,
+    height: 50,
     borderRadius: 10,
     flexDirection: 'column',
   },

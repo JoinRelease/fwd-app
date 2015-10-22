@@ -37,10 +37,8 @@ var ChatHelper = {
   },
 
   getListState: function() {
-    var week = (typeof this.getDefaultWeek == 'function') ? this.getDefaultWeek() : null;
     return {
-      items: this.getListItems(),
-      week: week
+      items: this.getListItems()
     };
   },
 
@@ -50,23 +48,31 @@ var ChatHelper = {
     }
   },
 
+  _onChange: function() {
+    this.setState(this.getListState());
+  },
+
+  messageAdded: function() {
+    this.reloadList();
+  },
+
   onDidFocusNavigation: function() {
     // items may have changed
     this.setState(this.getListState());
   },
 
   componentDidMount: function() {
-    this.props.store.addChangeListener(this.onListChange);
+    // Changed from whatever it is in ListHelper, change back if necessary! 10/21/15
+    this.props.store.addChangeListener(this._onChange);
     if (this.reloadList) {
       this.reloadList();
     };
-    // if (this.props.navBarHidden) {
-    //   AppActions.hideNavBar();
-    // };
   },
 
   componentWillUnmount: function() {
-    this.props.store.removeChangeListener(this.onListChange);
+
+    // Changed from whatever it is in ListHelper, change back if necessary! 10/21/15
+    this.props.store.removeChangeListener(this._onChange);
   },
 
   getNavBarState: function() {
@@ -116,7 +122,7 @@ var ChatHelper = {
     return (
       <View style={styles.flex}>
         {content}
-        <ChatInput />
+        <ChatInput messageAdded={this.messageAdded}/>
       </View>
     );
   },

@@ -10,6 +10,14 @@ var CHANGE_EVENT = 'change';
 // TODO: Immutable?
 var _hash = {};
 
+function addModel(key, props) {
+  if(!_hash[key]) _hash[key] = [];
+
+  var model = new ChatMessage(props);
+
+  _hash[key].unshift(model);
+}
+
 function setList(key, list) {
   var models = [];
   for(var i in list) {
@@ -44,6 +52,9 @@ Dispatcher.register(function(action) {
       setList(action.listProps.room_id, action.listProps.messages);
       ModelStore.emitChange(action.listProps.room_id);
       break;
+    case AppConstants.MESSAGE_ADDED:
+      addModel(action.messageProps.room_id, action.messageProps);
+      ModelStore.emitChange(action.messageProps.room_id);
     // TODO: save
     default:
       // no op

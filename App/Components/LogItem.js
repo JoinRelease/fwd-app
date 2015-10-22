@@ -75,7 +75,7 @@ var LogItem = React.createClass({
       <View style={styles.imageContainer}>
         <View style={{flexDirection: 'row'}}>
           <Image style={styles.image}
-                    source = {{uri: 'http://www.bonappetit.com/wp-content/uploads/2013/01/shake-shack-burger-fries.jpg'}}>
+                    source = {{uri: 'http://posttestserver.com/files/2015/10/20/f_14.03.171475469121'}}>
             <View style={styles.backdropView}>
               <Text style={styles.activityName}>{this.props.name}</Text>
               <Text style={styles.activityIntensity}>{this.props.intensity}</Text>
@@ -129,7 +129,7 @@ var LogItem = React.createClass({
   renderCommentRow: function(item, sectionId, rowId) {
 
     return (
-      <CommentItem {...item} key={'item'+ (item.key || rowId)}/>
+      <CommentItem {...item} key={'item'+ (item.id || rowId)}/>
     )
   },
 
@@ -146,17 +146,6 @@ var LogItem = React.createClass({
 
   },
 
-  renderRightIcon: function() {
-    if (!this.props.nextIcon) return null;
-
-    // caret-right-semi
-    return (
-      <Text style={styles.rightIcon}>
-        >
-      </Text>
-    );
-  },
-
   renderContent: function() {
     return (
       <View style={[styles.row, this.props.noTap && styles.touch]}>
@@ -166,9 +155,6 @@ var LogItem = React.createClass({
           {this.renderActions()}
           {this.renderDescription()}
           {this.renderComments()}
-        </View>
-        <View style={styles.right}>
-          {this.renderRightIcon()}
         </View>
       </View>
     );

@@ -40,11 +40,19 @@ var ChatService = {
   },
 
   fetchList: function(room_id, callback) {
-    client.get("/chat/" + this.roomIdToName(room_id), {}, function(error, response) {
+    client.get("chat/" + this.roomIdToName(room_id), {}, function(error, response) {
       var listProps = ChatService.parseMessages(response, room_id);
       callback(error, listProps);
     });
-  }
+  },
+
+  createMessage: function(content, callback) {
+    client.post("chat", content, function(error, response) {
+      var messageProps = ChatService.parseMessage(response);
+      console.log(response);
+      callback(error, messageProps);
+    });
+  },
 };
 
 module.exports = ChatService;

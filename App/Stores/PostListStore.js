@@ -16,9 +16,9 @@ function addModel(key, props) {
 
   var model;
 
-  if (props.type_of_log == 'activity')
+  if (props.type_of_log === 'activity')
     model = new ActivityLog(props);
-  else if (list[i].type_of_log == 'food')
+  else if (props.type_of_log === 'food')
     model = new FoodLog(props);
 
   _hash[key].unshift(model);

@@ -35,6 +35,7 @@ var ChatList = React.createClass({
     return {
       key: message.data.id,
       title: message.data.body,
+      answered: message.data.answered,
 
     }
   },

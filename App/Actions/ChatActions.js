@@ -15,6 +15,17 @@ var ChatActions = {
         });
       }
     });
+  },
+  createMessage: function(content, callback) {
+    ChatService.createMessage(content, function(error, messageProps) {
+      if(callback) callback(error);
+      if (!error) {
+        Dispatcher.dispatch({
+          actionType: AppConstants.MESSAGE_ADDED,
+          messageProps: messageProps
+        });
+      }
+    });
   }
 };
 

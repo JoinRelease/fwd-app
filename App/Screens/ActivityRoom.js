@@ -21,12 +21,10 @@ var ChatList = React.createClass({
     };
   },
   getListItems: function() {
-
     return ChatListStore.get(this.props.room_id);
   },
 
   isListChange: function(username) {
-
     // TODO: how to know if chatlist has changed??
     return this.getUsername() == username;
   },
@@ -35,7 +33,7 @@ var ChatList = React.createClass({
     return {
       key: message.data.id,
       title: message.data.body,
-
+      answered: message.data.answered,
     }
   },
 

@@ -1,8 +1,7 @@
 var React  = require('react-native');
 var {
   View,
-  StyleSheet,
-  TouchableHighlight
+  StyleSheet
 } = React;
 
 var cssVar = require('../Lib/cssVar');
@@ -14,7 +13,6 @@ var SimpleListItem = React.createClass({
 
 
   render: function() {
-    console.log(this.props);
 
     return (
       <View>

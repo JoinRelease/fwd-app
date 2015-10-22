@@ -62,8 +62,8 @@ var PostService = {
     });
   },
 
-  createFoodLog: function(content, callback) {
-    client.postFormData("/food_logs", content, function(error, response) {
+  createFoodLog: function(data, callback) {
+    client.postFormData("/food_logs", data, function(error, response) {
       var postProps = PostService.parseFoodLog(response);
       callback(error, postProps);
     });
