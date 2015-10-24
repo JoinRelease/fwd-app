@@ -56,10 +56,10 @@ var Routes = {
     };
   },
 
-  CreatePost: function() {
+  CreateActivityLog: function() {
     return {
       component: require('../Screens/TakePicture'),
-      title: 'New Post',
+      title: 'New Activity Log',
       navBack: {
         label: 'Cancel'
       }
@@ -103,7 +103,7 @@ var listRoute = function(route, defaultRoute) {
   route.parse = function(path) {
     switch(path) {
       case '_post':
-        return Routes.CreatePost();
+        return Routes.CreateActivityLog();
       case '_settings':
         // only on 'Dashboard'
         if(username) return null;

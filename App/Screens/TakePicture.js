@@ -12,6 +12,7 @@ var PostActions = require('../Actions/PostActions');
 var AppActions  = require('../Actions/AppActions');
 
 var KeyboardListener = require('../Mixins/KeyboardListener');
+var Camera = require('react-native-camera');
 
 
 var CreatePost = React.createClass({
@@ -25,7 +26,7 @@ var CreatePost = React.createClass({
   },
 
   onSubmitButton: function(data) {
-    PostActions.createFoodLog({image: {data, name: 'image.jpg'}}, function(error) {
+    PostActions.createFoodLog({image: {data, name: 'image.jpg'}, time: new Date().toISOString()}, function(error) {
       if (error) {
         // TODO: better error handling
         alert(error.message);
@@ -71,13 +72,13 @@ var CreatePost = React.createClass({
     var data;
     this.refs.cam.capture(function(err, data) {
       console.log(data);
-      PostActions.createFoodLog({image: {uri: data, name: 'image.jpg'}}, function(error) {
+      PostActions.createFoodLog({image: {uri: data, name: 'image.jpg'}, time: (new Date().toISOString())}, function(error) {
       if (error) {
         // TODO: better error handling
         alert(error.message);
       }
       else {
-        AppActions.goBack(this.props.navigator);
+        //AppActions.goBack(this.props.navigator);
       }
     }.bind(this));
 
@@ -111,7 +112,8 @@ var styles = StyleSheet.create({
   },
 
   container: {
-    flex: 1,
+    height: 380,
+    width: 380,
     justifyContent: 'center',
     alignItems: 'center',
     backgroundColor: 'transparent',

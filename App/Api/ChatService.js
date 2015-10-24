@@ -47,8 +47,9 @@ var ChatService = {
   },
 
   createMessage: function(content, callback) {
-    client.post("chat", content, function(error, response) {
-      var messageProps = ChatService.parseMessage(response);
+    console.log(content);
+    client.post("chat/" + this.roomIdToName(content.room_id), content, function(error, response) {
+      var messageProps = ChatService.parseMessage(response.chat_message);
       console.log(response);
       callback(error, messageProps);
     });

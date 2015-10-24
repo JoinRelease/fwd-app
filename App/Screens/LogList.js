@@ -150,6 +150,7 @@ updateDay: function(day) {
       type: log.data.type_of_log,
       time: log.data.time,
       heart: log.data.heart,
+      image: log.data.image,
       description: log.data.description,
       comments: log.data.comments
     }

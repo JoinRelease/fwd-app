@@ -15,18 +15,6 @@ var PostActions = {
       }
     });
   },
-
-  createPost: function(content, callback) {
-    PostService.createPost(content, function(error, postProps) {
-      if(callback) callback(error);
-      if (!error) {
-        Dispatcher.dispatch({
-          actionType: AppConstants.POST_ADDED,
-          postProps: postProps
-        });
-      }
-    });
-  },
   createActivityLog: function(content, callback) {
     PostService.createActivityLog(content, function(error, postProps) {
       if (callback) callback(error);

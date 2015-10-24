@@ -24,8 +24,8 @@ var ChatInput = React.createClass({
       content: {
         body: '',
         user_id: CurrentUserStore.get().data.id,
-        room: 1,
-        answered: true,
+        room_id: this.props.roomId,
+        answered: false,
       }
     };
   },
@@ -34,7 +34,7 @@ var ChatInput = React.createClass({
     this.setState({content: {
       body: text,
       user_id: this.state.content.user_id,
-      room: this.state.content.room,
+      room_id: this.state.content.room_id,
       answered: this.state.content.answered
     }});
   },

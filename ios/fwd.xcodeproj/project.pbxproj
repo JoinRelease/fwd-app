@@ -37,6 +37,8 @@
 		3361AF181BC30C4F00016CCF /* libRNKeychain.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3361AF171BC30C3100016CCF /* libRNKeychain.a */; };
 		3361AF191BC30C5600016CCF /* libRNKeyboardEvents.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3361AF111BC30C2400016CCF /* libRNKeyboardEvents.a */; };
 		3361AF271BC30D8E00016CCF /* EnvironmentManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 3361AF261BC30D8E00016CCF /* EnvironmentManager.m */; };
+		33A04F341BD97865006000F6 /* libRCTRemotePushManager.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 33A04F2B1BD97835006000F6 /* libRCTRemotePushManager.a */; };
+		33A04F371BD978B9006000F6 /* RemotePushDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 33A04F361BD978B9006000F6 /* RemotePushDelegate.m */; settings = {ASSET_TAGS = (); }; };
 		832341BD1AAA6AB300B99B32 /* libRCTText.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 832341B51AAA6A8300B99B32 /* libRCTText.a */; };
 /* End PBXBuildFile section */
 
@@ -139,6 +141,13 @@
 			remoteGlobalIDString = 5D82366F1B0CE05B005A9EF3;
 			remoteInfo = RNKeychain;
 		};
+		33A04F2A1BD97835006000F6 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 33A04F1F1BD97835006000F6 /* RCTRemotePushManager.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 48DDA26A1B0A1157004C75B0;
+			remoteInfo = RCTRemotePushManager;
+		};
 		78C398B81ACF4ADC00677621 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 78C398B01ACF4ADC00677621 /* RCTLinking.xcodeproj */;
@@ -189,6 +198,9 @@
 		3361AF0C1BC30C2400016CCF /* RNKeyboardEvents.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RNKeyboardEvents.xcodeproj; path = "../node_modules/react-native-keyboardevents/RNKeyboardEvents.xcodeproj"; sourceTree = "<group>"; };
 		3361AF121BC30C3100016CCF /* RNKeychain.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RNKeychain.xcodeproj; path = "../node_modules/react-native-keychain/RNKeychain.xcodeproj"; sourceTree = "<group>"; };
 		3361AF261BC30D8E00016CCF /* EnvironmentManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = EnvironmentManager.m; path = fwd/EnvironmentManager.m; sourceTree = "<group>"; };
+		33A04F1F1BD97835006000F6 /* RCTRemotePushManager.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTRemotePushManager.xcodeproj; path = "../node_modules/react-native-remote-push/RCTRemotePushManager.xcodeproj"; sourceTree = "<group>"; };
+		33A04F351BD978B9006000F6 /* RemotePushDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RemotePushDelegate.h; sourceTree = "<group>"; };
+		33A04F361BD978B9006000F6 /* RemotePushDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RemotePushDelegate.m; sourceTree = "<group>"; };
 		78C398B01ACF4ADC00677621 /* RCTLinking.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTLinking.xcodeproj; path = "../node_modules/react-native/Libraries/LinkingIOS/RCTLinking.xcodeproj"; sourceTree = "<group>"; };
 		81374A1BE63384D8EC51610F /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		832341B01AAA6A8300B99B32 /* RCTText.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTText.xcodeproj; path = "../node_modules/react-native/Libraries/Text/RCTText.xcodeproj"; sourceTree = "<group>"; };
@@ -208,6 +220,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				33A04F341BD97865006000F6 /* libRCTRemotePushManager.a in Frameworks */,
 				333A28B31BD07B1100677621 /* libRCTCamera.a in Frameworks */,
 				333A28AC1BD05A4F00677621 /* libActivityView.a in Frameworks */,
 				3361AF191BC30C5600016CCF /* libRNKeyboardEvents.a in Frameworks */,
@@ -309,6 +322,8 @@
 				008F07F21AC5B25A0029DE68 /* main.jsbundle */,
 				13B07FAF1A68108700A75B9A /* AppDelegate.h */,
 				13B07FB01A68108700A75B9A /* AppDelegate.m */,
+				33A04F351BD978B9006000F6 /* RemotePushDelegate.h */,
+				33A04F361BD978B9006000F6 /* RemotePushDelegate.m */,
 				13B07FB51A68108700A75B9A /* Images.xcassets */,
 				13B07FB61A68108700A75B9A /* Info.plist */,
 				13B07FB11A68108700A75B9A /* LaunchScreen.xib */,
@@ -382,6 +397,14 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
+		33A04F201BD97835006000F6 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				33A04F2B1BD97835006000F6 /* libRCTRemotePushManager.a */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
 		78C398B11ACF4ADC00677621 /* Products */ = {
 			isa = PBXGroup;
 			children = (
@@ -393,6 +416,7 @@
 		832341AE1AAA6A7D00B99B32 /* Libraries */ = {
 			isa = PBXGroup;
 			children = (
+				33A04F1F1BD97835006000F6 /* RCTRemotePushManager.xcodeproj */,
 				333A28AD1BD07AD100677621 /* RCTCamera.xcodeproj */,
 				333A28991BD05A2F00677621 /* ActivityView.xcodeproj */,
 				3361AF121BC30C3100016CCF /* RNKeychain.xcodeproj */,
@@ -560,6 +584,10 @@
 					ProjectRef = 00C302D31ABCB9D200DB3ED1 /* RCTNetwork.xcodeproj */;
 				},
 				{
+					ProductGroup = 33A04F201BD97835006000F6 /* Products */;
+					ProjectRef = 33A04F1F1BD97835006000F6 /* RCTRemotePushManager.xcodeproj */;
+				},
+				{
 					ProductGroup = 139105B71AF99BAD00B5F7CC /* Products */;
 					ProjectRef = 139105B61AF99BAD00B5F7CC /* RCTSettings.xcodeproj */;
 				},
@@ -692,6 +720,13 @@
 			remoteRef = 3361AF161BC30C3100016CCF /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
+		33A04F2B1BD97835006000F6 /* libRCTRemotePushManager.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libRCTRemotePushManager.a;
+			remoteRef = 33A04F2A1BD97835006000F6 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
 		78C398B91ACF4ADC00677621 /* libRCTLinking.a */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
@@ -784,6 +819,7 @@
 			files = (
 				3361AF271BC30D8E00016CCF /* EnvironmentManager.m in Sources */,
 				13B07FBC1A68108700A75B9A /* AppDelegate.m in Sources */,
+				33A04F371BD978B9006000F6 /* RemotePushDelegate.m in Sources */,
 				13B07FC11A68108700A75B9A /* main.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -868,6 +904,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "org.reactjs.native.example.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = fwd;
 				PROVISIONING_PROFILE = "";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -889,6 +926,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "org.reactjs.native.example.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = fwd;
 				PROVISIONING_PROFILE = "";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};

@@ -69,13 +69,14 @@ var LogItem = React.createClass({
   },
 
   renderImage: function() {
+    var imgurl = this.props.type === 'food' ? this.props.image.url : '';
     //if (!this.props.subtitle) return null;
     // TODO: set defaultSource {uri: string} (local file to display in meantime)
     return (
       <View style={styles.imageContainer}>
         <View style={{flexDirection: 'row'}}>
           <Image style={styles.image}
-                    source = {{uri: 'http://posttestserver.com/files/2015/10/20/f_14.03.171475469121'}}>
+                    source = {{uri: imgurl}}>
             <View style={styles.backdropView}>
               <Text style={styles.activityName}>{this.props.name}</Text>
               <Text style={styles.activityIntensity}>{this.props.intensity}</Text>

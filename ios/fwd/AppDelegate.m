@@ -8,14 +8,21 @@
  */
 
 #import "AppDelegate.h"
+#import "RemotePushDelegate.h"
+
 
 #import "RCTRootView.h"
 
 @implementation AppDelegate
 
+- (id) init {
+  return self;
+}
+
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
   NSURL *jsCodeLocation;
+  
 
   /**
    * Loading JavaScript code - uncomment the one you want.
@@ -30,7 +37,7 @@
    * `inet` value under `en0:`) and make sure your computer and iOS device are
    * on the same Wi-Fi network.
    */
-
+  
   jsCodeLocation = [NSURL URLWithString:@"http://localhost:8081/index.ios.bundle"];
 
   /**

@@ -122,7 +122,7 @@ var ChatHelper = {
     return (
       <View style={styles.flex}>
         {content}
-        <ChatInput messageAdded={this.messageAdded}/>
+        <ChatInput messageAdded={this.messageAdded} roomId={this.props.room_id}/>
       </View>
     );
   },

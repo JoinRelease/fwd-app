@@ -11,6 +11,7 @@ var PostService = {
       time: response.time,
       description: response.description,
       heart: response.heart,
+      image: response.image,
       created_at: response.created_at,
       updated_at: response.updated_at,
 
@@ -56,20 +57,22 @@ var PostService = {
   },
 
   fetchList: function(username, callback) {
-    client.get("/logs", {}, function(error, response) {
+    client.get("logs", {}, function(error, response) {
       var listProps = PostService.parseLogs(response, username);
       callback(error, listProps);
     });
   },
 
   createFoodLog: function(data, callback) {
-    client.postFormData("/food_logs", data, function(error, response) {
+    client.postFormData("food_logs", data, function(error, response) {
+      console.log(response);
       var postProps = PostService.parseFoodLog(response);
       callback(error, postProps);
     });
   },
   createActivityLog: function(content, callback) {
-    client.post("/activity_logs", content, function(error, response) {
+    client.post("activity_logs", content, function(error, response) {
+      console.log(response);
       var postProps = PostService.parseActivityLog(response);
       callback(error, postProps);
     });
