@@ -20,7 +20,8 @@ module.exports = {
 
   // http://iosfonts.com/
   fontRegular: "Avenir-Book",
-  fontIcon: "HelveticaNeue", // TODO: get an icon font and include
+  fontIcon: "HelveticaNeue",
+  fontLogo: "SavoyeLetPlain", // TODO: get an icon font and include
 
   listLine: {
     backgroundColor: 'rgba(0, 0, 0, 0.1)',

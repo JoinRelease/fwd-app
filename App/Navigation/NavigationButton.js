@@ -12,6 +12,7 @@ var AppConstants       = require('../Constants/AppConstants');
 var AppActions         = require('../Actions/AppActions');
 
 var Text = require('../Components/Text');
+var Icon = require('react-native-vector-icons/Ionicons');
 
 var NavigationButton = React.createClass({
   mixins: [DispatcherListener],
@@ -33,22 +34,33 @@ var NavigationButton = React.createClass({
 
   makeButton: function(item, style, callback) {
     var styleType;
-    var text;
+    var comp;
 
-    if (item.icon) {
-      styleType = styles.navBarIcon;
-      text = item.icon;
+    if (item.mixIcon) {
+      comp = (
+                <Icon name={item.mixIcon.icon} size={40} color="#FFF" style={[ styles[item.label + 'NavBar'], item.disabled && styles.disabledText]}>
+                    <Text style={[styles.navBarText, styles.navBarIconText, styles.navBarButtonText, styles[item.mixIcon.label + 'NavBar'], item.disabled && styles.disabledText]}>
+                      {item.mixIcon.label}
+                    </Text>
+                </Icon>
+      )
+    }
+    else if (item.icon) {
+      comp = (
+              <Icon name={item.icon} size={30} color="#FFF" style={[styles.navBarText, styles[item.label + 'NavBar'], item.disabled && styles.disabledText]} />
+              )
     }
     else {
-      styleType = styles.navBarText;
-      text = item.label;
+      comp = (
+              <Text style={[styles.navBarText, styles.navBarButtonText, styles[item.label + 'NavBar'], item.disabled && styles.disabledText]}>
+                  {item.label}
+              </Text>
+        )
     }
 
     var button = (
       <View style={style}>
-        <Text style={[styleType, styles.navBarButtonText, styles[text + 'NavBar'], item.disabled && styles.disabledText]}>
-          {text}
-        </Text>
+        {comp}
       </View>
     );
 
@@ -85,7 +97,7 @@ var NavigationButton = React.createClass({
       return null;
     }
 
-    var backLabel = route.navBack || {icon: 'back'}; //{icon: 'caret-left-semi'};
+    var backLabel = route.navBack || {icon: 'android-arrow-back'}; //{icon: 'caret-left-semi'};
     return this.makeButton(backLabel, styles.navBarLeftButton, this.goBack);
   },
 
@@ -107,13 +119,15 @@ var NavigationButton = React.createClass({
 
 var styles = StyleSheet.create({
   navBarText: {
-    fontSize: 16,
-    marginVertical: 10,
-  },
-  navBarIcon: {
     fontSize: 20,
     marginVertical: 10,
-    fontFamily: cssVar('fontIcon'),
+  },
+  navBarIconText: {
+    marginLeft: 5,
+    justifyContent: 'center'
+  },
+  navBarIcon: {
+    marginVertical: 10,
   },
   navBarLeftButton: {
     paddingLeft: 10,

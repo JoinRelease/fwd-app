@@ -25,11 +25,11 @@ var Routes = {
       },
       navRight: {
         subPath: '_post',
-        label: '+A' // TODO: icon font
+        icon: 'android-create' // TODO: icon font
       },
       navLeft: {
         subPath: '_settings',
-        label: 'S' // TODO: icon font
+        icon: 'gear-a' // TODO: icon font
       },
     };
   },
@@ -61,7 +61,7 @@ var Routes = {
       component: require('../Screens/CreateFoodLog'),
       title: 'New Activity Log',
       navBack: {
-        label: 'Cancel'
+        icon: 'close-round'
       }
     };
   },
@@ -71,7 +71,10 @@ var Routes = {
       component: require('../Screens/NutritionRoom'),
       title: 'Nutrition Team',
       navBack: {
-        label: 'Messages'
+        mixIcon: {
+          label: 'Messages',
+          icon: 'ios-arrow-back'
+        }
       }
     }
   },
@@ -80,7 +83,10 @@ var Routes = {
       component: require('../Screens/CookingRoom'),
       title: 'Cooking Hotline',
       navBack: {
-        label: 'Messages'
+        mixIcon: {
+          label: 'Messages',
+          icon: 'ios-arrow-back'
+        }
       }
     }
   },
@@ -89,7 +95,10 @@ var Routes = {
       component: require('../Screens/ActivityRoom'),
       title: 'Activity Team',
       navBack: {
-        label: 'Messages'
+        mixIcon: {
+          label: 'Messages',
+          icon: 'ios-arrow-back'
+        }
       }
     }
   }

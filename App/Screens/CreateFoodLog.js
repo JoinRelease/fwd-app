@@ -166,11 +166,11 @@ var CreateActivityLog = React.createClass({
             onChange={(event) => this.state.description = event.nativeEvent.text }
           />
         </View>
-        <View style={[styles.flex, styles.input]}>
-          <View>
+        <View style={[styles.flex, styles.input, styles.footer, styles.inline]}>
+          <View style={[styles.left]}>
             {imageEdit}
           </View>
-          <View>
+          <View style={[styles.right, styles.bottom]}>
             <Button type='blue' style={styles.button} onPress={this.onSubmitButton}>
               Submit
             </Button>
@@ -198,6 +198,9 @@ var styles = StyleSheet.create({
     borderLeftWidth: 0,
     backgroundColor: 'white',
   },
+  footer: {
+    padding: 10
+  },
   textInput: {
     flex: 1,
     fontSize: 16,
@@ -224,6 +227,9 @@ var styles = StyleSheet.create({
   right: {
 
   },
+  bottom: {
+    justifyContent: 'flex-end',
+  },
   button: {
     // width: 150
   },
@@ -232,7 +238,6 @@ var styles = StyleSheet.create({
     height: 140,
     borderColor: 'gray',
     borderWidth: 1,
-    margin: 5
   },
   imageIcon: {
     alignItems: 'center',

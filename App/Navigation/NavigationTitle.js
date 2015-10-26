@@ -30,6 +30,7 @@ var NavigationTitle = React.createClass({
 
   render: function() {
     var title = this.state.updatedTitle || this.props.route.title;
+    var logoTitle = (title === 'Forward');
     if (this.props.titleComponent) {
       return (
         <View>
@@ -39,7 +40,7 @@ var NavigationTitle = React.createClass({
     }
     else {
       return (
-        <Text style={styles.navBarTitleText}>
+        <Text style={[styles.navBarTitleText, logoTitle && styles.navBarTitleLogo]}>
           {title}
         </Text>
       );
@@ -54,6 +55,11 @@ var styles = StyleSheet.create({
     color: 'white',
     fontWeight: '500',
     marginVertical: 9,
+  },
+  navBarTitleLogo: {
+    fontSize: 35,
+    fontWeight: '900',
+    fontFamily: cssVar('fontLogo')
   }
 });
 

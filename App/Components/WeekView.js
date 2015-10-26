@@ -3,7 +3,8 @@
 var React = require('react-native');
 var {
   StyleSheet,
-  TouchableHighlight,
+  TouchableOpacity,
+
   View
 } = React;
 
@@ -72,9 +73,8 @@ var DayItem = React.createClass({
     }
     else {
       return (
-        <TouchableHighlight
-          style={styles.flex}
-          underlayColor='#FFFFFF'
+        <TouchableOpacity
+          style={[styles.flex, styles.button]}
           onPress={this.onSelection}
         >
           <View style={[styles.button, styles.linkButton]}>
@@ -82,7 +82,7 @@ var DayItem = React.createClass({
               {this.props.title}
             </Text>
           </View>
-        </TouchableHighlight>
+        </TouchableOpacity>
       );
     }
   }
@@ -91,7 +91,7 @@ var DayItem = React.createClass({
 
 var styles = StyleSheet.create({
   container: {
-    backgroundColor: 'black'//cssVar('blue50'),
+    backgroundColor: cssVar('blue50'),
   },
   control: {
     flex: 1,
@@ -108,6 +108,7 @@ var styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
+    borderRadius: 0
   },
   selectedButton: {
     backgroundColor: 'white',
