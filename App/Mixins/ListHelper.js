@@ -58,6 +58,9 @@ var ListHelper = {
       this.setState(this.getListState());
     }
   },
+  _onChange: function() {
+    this.setState(this.getListState());
+  },
 
   onDidFocusNavigation: function() {
     // items may have changed
@@ -65,7 +68,7 @@ var ListHelper = {
   },
 
   componentDidMount: function() {
-    this.props.store.addChangeListener(this.onListChange);
+    this.props.store.addChangeListener(this._onChange);
     if (this.reloadList) {
       this.reloadList();
     };
@@ -75,7 +78,7 @@ var ListHelper = {
   },
 
   componentWillUnmount: function() {
-    this.props.store.removeChangeListener(this.onListChange);
+    this.props.store.removeChangeListener(this._onChange);
   },
 
   getNavBarState: function() {
@@ -100,6 +103,10 @@ var ListHelper = {
 
       var filteredList = [];
       for (var i in items) {
+        if (items[i] === undefined )
+        {
+          continue;
+        }
         var d = new Date(items[i].data.time);
         if (d.getDay() === day) {
 

@@ -18,6 +18,7 @@ var CreateActivityLog = React.createClass({
   mixins: [KeyboardListener],
 
   getInitialState: function() {
+    console.log(this.props);
     return {
       time: new Date(),
       name: '',

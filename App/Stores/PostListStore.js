@@ -45,18 +45,6 @@ var ModelStore = assign({}, EventEmitter.prototype, {
     return _hash[key];
   },
 
-  get_sorted: function(key, key2) {
-    _hash_ = _hash[key];
-    console.log(_hash_);
-    return _hash_;
-  },
-
-  // sort: function(day) {
-  //   userPosts = _hash[key];
-  //   for (var i; i< userPosts.length ; i++ ){
-
-  //   }
-  // },
 
   emitChange: function(key) {
     this.emit(CHANGE_EVENT, key);

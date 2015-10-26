@@ -152,7 +152,9 @@ updateDay: function(day) {
       heart: log.data.heart,
       image: log.data.image,
       description: log.data.description,
-      comments: log.data.comments
+      comments: log.data.comments,
+
+      subPath: '_comments',
     }
   },
   activityItemProps: function(log) {
@@ -164,7 +166,9 @@ updateDay: function(day) {
       heart: log.data.heart,
       name: log.data.name,
       intensity: log.data.intensity,
-      comments: log.data.comments
+      comments: log.data.comments,
+
+      subPath: '_comments',
     }
   },
 

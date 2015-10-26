@@ -65,6 +65,15 @@ var Routes = {
       }
     };
   },
+  // CreateComment: function() {
+  //   return {
+  //     component: require('../Screens/CreateActivityLog'),
+  //     title: 'New Comment',
+  //     navBack: {
+  //       icon: 'android-arrow-back'
+  //     }
+  //   };
+  // },
 
   NutritionRoom: function() {
     return {

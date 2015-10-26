@@ -47,7 +47,7 @@ var NavigationButton = React.createClass({
     }
     else if (item.icon) {
       comp = (
-              <Icon name={item.icon} size={30} color="#FFF" style={[styles.navBarText, styles[item.label + 'NavBar'], item.disabled && styles.disabledText]} />
+              <Icon name={item.icon} size={30} color="#FFF" style={[styles[item.label + 'NavBar'], item.disabled && styles.disabledText]} />
               )
     }
     else {
@@ -119,7 +119,7 @@ var NavigationButton = React.createClass({
 
 var styles = StyleSheet.create({
   navBarText: {
-    fontSize: 20,
+    fontSize: 18,
     marginVertical: 10,
   },
   navBarIconText: {

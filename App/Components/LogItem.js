@@ -44,10 +44,13 @@ var LogItem = React.createClass({
 
   _shareHandler: function() {
     ActivityView.show({
-      text: 'ActivityView for React Native',
-      url: 'https://github.com/naoufal/react-native-activity-view',
-      imageUrl: 'https://facebook.github.io/react/img/logo_og.png',
+      text: this.props.description,
+      url: this.props.share_url,
+      imageUrl: this.props.image.url,
     });
+  },
+  _commentHandler: function() {
+    AppActions.launchRelativeItem(this.props.currentRoute, this.props);
   },
   renderHeader: function() {
     var type = this.props.type
@@ -89,11 +92,7 @@ var LogItem = React.createClass({
   },
 
   renderActions: function() {
-
     var heartColor = this.props.heart ? cssVar('heartActive') : cssVar('gray10');
-    //var heart = ()
-
-
     return (
       <View>
         <View style={[styles.inline, styles.underline, styles.overline]}>
@@ -101,8 +100,9 @@ var LogItem = React.createClass({
             <Icon name="ios-heart" size={40} color={heartColor} />
 
             <View style= {styles.spacer}/>
-
-            <Icon name="ios-chatbubble-outline" size={40} color={cssVar('gray30')} />
+            <TouchableOpacity onPress={this._commentHandler} activeOpacity={0.1}>
+              <Icon name="ios-chatbubble-outline" size={40} color={cssVar('gray30')} />
+            </TouchableOpacity>
           </View>
 
           <TouchableOpacity onPress={this._shareHandler} style={[styles.right]} activeOpacity={0.1}>
@@ -146,7 +146,6 @@ var LogItem = React.createClass({
     );
 
   },
-
   renderContent: function() {
     return (
       <View style={[styles.row, this.props.noTap && styles.touch]}>

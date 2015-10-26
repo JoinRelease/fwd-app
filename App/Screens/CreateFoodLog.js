@@ -11,6 +11,7 @@ var TextInput   = require('../Components/TextInput');
 var Button      = require('../Components/Button');
 var PostActions = require('../Actions/PostActions');
 var AppActions  = require('../Actions/AppActions');
+var CurrentUserStore = require('../Stores/CurrentUserStore');
 
 var UIImagePickerManager = require('NativeModules').UIImagePickerManager;
 var Icon = require('react-native-vector-icons/Ionicons');
@@ -41,6 +42,12 @@ var CreateActivityLog = React.createClass({
         alert(error.message);
       }
       else {
+        PostActions.fetchList(CurrentUserStore.get().data.username, function(error) {
+          // TODO: handle error
+          if (error) {
+            alert(error.message);
+          }
+        });
         AppActions.goBack(this.props.navigator);
       }
     }.bind(this));
