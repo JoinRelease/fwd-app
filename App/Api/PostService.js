@@ -65,15 +65,14 @@ var PostService = {
 
   createFoodLog: function(data, callback) {
     client.postFormData("food_logs", data, function(error, response) {
-      console.log(response);
-      var postProps = PostService.parseFoodLog(response);
+      var postProps = PostService.parseFoodLog(response.food_log);
       callback(error, postProps);
     });
   },
   createActivityLog: function(content, callback) {
     client.post("activity_logs", content, function(error, response) {
       console.log(response);
-      var postProps = PostService.parseActivityLog(response);
+      var postProps = PostService.parseActivityLog(response.activity_log);
       callback(error, postProps);
     });
   },

@@ -58,7 +58,7 @@ var Routes = {
 
   CreateActivityLog: function() {
     return {
-      component: require('../Screens/TakePicture'),
+      component: require('../Screens/CreateFoodLog'),
       title: 'New Activity Log',
       navBack: {
         label: 'Cancel'

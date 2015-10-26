@@ -153,17 +153,10 @@ var HTTPClient = {
     this.fetch(req, callback);
   },
 
-// this.url(path) 'https://posttestserver.com/post.php'
   postFormData: function(path, data, callback) {
     var req = superagent.post(this.url(path));
-    var formData = new FormData();
-    console.log(data);
     if (data) {
-
-      formData.append('image', data.image);
-      formData.append('time', data.time);
-      console.log(formData);
-      req = req.send(formData);
+      req = req.send(data);
     }
     this.fetchFormData(req, callback);
   },
