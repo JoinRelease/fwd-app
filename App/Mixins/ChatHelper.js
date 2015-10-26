@@ -38,8 +38,18 @@ var ChatHelper = {
 
   getListState: function() {
     return {
-      items: this.getListItems()
+      items: this.getListItems(),
+      sending: false,
     };
+  },
+
+  toggleSending: function() {
+    this.setState({sending: (!this.state.sending)})
+  },
+
+  getNavBarState: function() {
+    var title = this.state.sending ? 'Sending...' : this.props.navBarTitle;
+    return { title: title };
   },
 
   onListChange: function(arg) {
@@ -75,10 +85,6 @@ var ChatHelper = {
     this.props.store.removeChangeListener(this._onChange);
   },
 
-  getNavBarState: function() {
-    var title = this.props.navBarTitle ? this.props.navBarTitle : "Forward";
-    return { title: title };
-  },
 
   getUsername: function() {
     if (!this.username) {
@@ -122,7 +128,7 @@ var ChatHelper = {
     return (
       <View style={styles.flex}>
         {content}
-        <ChatInput messageAdded={this.messageAdded} roomId={this.props.room_id}/>
+        <ChatInput toggleSubmitting={this.toggleSending} messageAdded={this.messageAdded} roomId={this.props.room_id} />
       </View>
     );
   },

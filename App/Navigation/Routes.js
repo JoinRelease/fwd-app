@@ -59,7 +59,7 @@ var Routes = {
   CreateActivityLog: function() {
     return {
       component: require('../Screens/CreateFoodLog'),
-      title: 'New Activity Log',
+      title: '',
       navBack: {
         icon: 'close-round'
       }

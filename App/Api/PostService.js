@@ -64,8 +64,8 @@ var PostService = {
     });
   },
 
-  createFoodLog: function(data, callback) {
-    client.postFormData("food_logs", data, function(error, response) {
+  createFoodLog: function(data, progressCallback, callback) {
+    client.postFormData("food_logs", data, progressCallback, function(error, response) {
       var postProps = PostService.parseFoodLog(response.food_log);
       postProps.username = CurrentUserStore.get().data.username;
       callback(error, postProps);

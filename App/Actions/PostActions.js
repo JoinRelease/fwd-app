@@ -26,8 +26,8 @@ var PostActions = {
       }
     });
   },
-  createFoodLog: function(content, callback) {
-    PostService.createFoodLog(content, function(error, postProps) {
+  createFoodLog: function(content, progressCallback, callback) {
+    PostService.createFoodLog(content, progressCallback, function(error, postProps) {
       if (callback) callback(error);
       if (!error) {
         Dispatcher.dispatch({

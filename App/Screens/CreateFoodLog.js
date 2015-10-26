@@ -4,7 +4,8 @@ var {
   StyleSheet,
   Text,
   TouchableOpacity,
-  Image
+  Image,
+  ProgressViewIOS,
 } = React;
 
 var TextInput   = require('../Components/TextInput');
@@ -12,6 +13,7 @@ var Button      = require('../Components/Button');
 var PostActions = require('../Actions/PostActions');
 var AppActions  = require('../Actions/AppActions');
 var CurrentUserStore = require('../Stores/CurrentUserStore');
+var NavBarHelper = require('../Mixins/NavBarHelper');
 
 var UIImagePickerManager = require('NativeModules').UIImagePickerManager;
 var Icon = require('react-native-vector-icons/Ionicons');
@@ -19,7 +21,7 @@ var KeyboardListener = require('../Mixins/KeyboardListener');
 
 
 var CreateActivityLog = React.createClass({
-  mixins: [KeyboardListener],
+  mixins: [KeyboardListener, NavBarHelper],
 
   getInitialState: function() {
     return {
@@ -27,16 +29,26 @@ var CreateActivityLog = React.createClass({
       image: '',
       time: new Date(),
       editingTime: false,
-      imageChosen: false
+      imageChosen: false,
+      loading: false,
+      uploadProgress: null
     };
   },
 
+  updateProgress: function(e) {
+    this.setState({uploadProgress: e.loaded/ e.total})
+  },
+
   onSubmitButton: function() {
+
     var data = new FormData();
     data.append('description', this.state.description);
     data.append('image', this.state.image);
     data.append('time', this.state.time.toISOString());
-    PostActions.createFoodLog(data, function(error) {
+    PostActions.createFoodLog(data, function(e) {
+      this.updateProgress(e);
+    }.bind(this),
+    function(error) {
       if (error) {
         // TODO: better error handling
         alert(error.message);
@@ -51,6 +63,12 @@ var CreateActivityLog = React.createClass({
         AppActions.goBack(this.props.navigator);
       }
     }.bind(this));
+    this.setState({loading: true})
+  },
+
+  getNavBarState: function() {
+    var title = this.state.loading ? 'Creating...' : 'Create Food Log';
+    return { title: title };
   },
 
   toggleDurationEdit: function() {
@@ -102,6 +120,19 @@ var CreateActivityLog = React.createClass({
 
   },
 
+  renderProgress: function() {
+    if (this.state.loading) {
+      return (
+              <ProgressViewIOS progress={this.state.uploadProgress}/>
+              );
+    }
+    else {
+      return (
+              <View />
+              );
+    }
+  },
+
   renderTime: function() {
     if (this.state.editingTime) {
       return (
@@ -151,39 +182,42 @@ var CreateActivityLog = React.createClass({
   },
 
   render: function() {
-
+    var progress = this.renderProgress();
     var timeEdit = this.renderTime();
     var imageEdit = this.renderImage();
-
     return (
-      <View style={[styles.flex]}>
-        <View style={[styles.qFlex, styles.inline, styles.input]} >
-          <Text style={[styles.timeLabel, styles.left]}> Time: </Text>
-            {timeEdit}
-        </View>
-        <View style={[styles.flex, styles.input]}>
-          <TextInput ref="content"
-            placeholder={"What did you eat?"}
-            keyboardType="default"
-            multiline={true}
-            autoFocus={false}
-            style={styles.textInput}
-            enablesReturnKeyAutomatically={true}
-            returnKeyType='done'
-            onChange={(event) => this.state.description = event.nativeEvent.text }
-          />
-        </View>
-        <View style={[styles.flex, styles.input, styles.footer, styles.inline]}>
-          <View style={[styles.left]}>
-            {imageEdit}
+
+      <View style={styles.flex}>
+        {progress}
+        <View style={[styles.flex, this.state.loading && styles.loading]}>
+          <View style={[styles.qFlex, styles.inline, styles.input]} >
+            <Text style={[styles.timeLabel, styles.left]}> Time: </Text>
+              {timeEdit}
           </View>
-          <View style={[styles.right, styles.bottom]}>
-            <Button type='blue' style={styles.button} onPress={this.onSubmitButton}>
-              Submit
-            </Button>
+          <View style={[styles.flex, styles.input]}>
+            <TextInput ref="content"
+              placeholder={"What did you eat?"}
+              keyboardType="default"
+              multiline={true}
+              autoFocus={false}
+              style={styles.textInput}
+              enablesReturnKeyAutomatically={true}
+              returnKeyType='done'
+              onChange={(event) => this.state.description = event.nativeEvent.text }
+            />
           </View>
+          <View style={[styles.flex, styles.input, styles.footer, styles.inline]}>
+            <View style={[styles.left]}>
+              {imageEdit}
+            </View>
+            <View style={[styles.right, styles.bottom]}>
+              <Button type='blue' style={styles.button} onPress={this.onSubmitButton}>
+                Submit
+              </Button>
+            </View>
+          </View>
+          <View style={{height: this.state.keyboardSpace}}></View>
         </View>
-        <View style={{height: this.state.keyboardSpace}}></View>
       </View>
     );
   },
@@ -193,6 +227,9 @@ var CreateActivityLog = React.createClass({
 var styles = StyleSheet.create({
   flex: {
     flex: 1
+  },
+  loading: {
+    opacity: 0.3
   },
   qFlex: {
     flex: 0.25

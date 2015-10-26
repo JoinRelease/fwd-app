@@ -153,10 +153,13 @@ var HTTPClient = {
     this.fetch(req, callback);
   },
 
-  postFormData: function(path, data, callback) {
+  postFormData: function(path, data, progressCallback, callback) {
     var req = superagent.post(this.url(path));
     if (data) {
       req = req.send(data);
+      req.on('progress', function(e) {
+        progressCallback(e);
+      });
     }
     this.fetchFormData(req, callback);
   },

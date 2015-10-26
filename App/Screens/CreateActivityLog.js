@@ -11,14 +11,14 @@ var PostActions = require('../Actions/PostActions');
 var AppActions  = require('../Actions/AppActions');
 var ScrollSelect = require('../Components/ScrollSelect');
 var TimeInput = require('../Components/TimeInput');
+var NavBarHelper = require('../Mixins/NavBarHelper');
 
 var KeyboardListener = require('../Mixins/KeyboardListener');
 
 var CreateActivityLog = React.createClass({
-  mixins: [KeyboardListener],
+  mixins: [KeyboardListener, NavBarHelper],
 
   getInitialState: function() {
-    console.log(this.props);
     return {
       time: new Date(),
       name: '',
@@ -73,11 +73,10 @@ var CreateActivityLog = React.createClass({
       }
     });
   },
-
-  // changeDate: function(date) {
-  //   this.setState({time: date});
-  //   console.log(this.state.time);
-  // },
+  getNavBarState: function() {
+    var title = this.state.loading ? 'Sending...' : 'Create Activity Log';
+    return { title: title };
+  },
 
   onSubmitButton: function() {
     PostActions.createActivityLog({

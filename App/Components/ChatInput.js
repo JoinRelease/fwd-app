@@ -26,6 +26,7 @@ var ChatInput = React.createClass({
         user_id: CurrentUserStore.get().data.id,
         room_id: this.props.roomId,
         answered: false,
+        submitting: false,
       }
     };
   },
@@ -42,17 +43,27 @@ var ChatInput = React.createClass({
     this.setState(this.blankContent);
   },
 
+  toggleSubmitting: function() {
+    this.setState({submitting: (!this.state.submitting)})
+  },
+
   onSubmitButton: function() {
-    ChatActions.createMessage(this.state.content, function(error) {
-      if (error) {
-        // TODO: better error handling
-        alert(error.message);
-      }
-      else {
-        this.props.messageAdded();
-        this.clearText();
-      }
-    }.bind(this));
+    if (!this.state.submitting) {
+      this.props.toggleSubmitting();
+      this.toggleSubmitting();
+      ChatActions.createMessage(this.state.content, function(error) {
+        if (error) {
+          // TODO: better error handling
+          alert(error.message);
+        }
+        else {
+          this.props.messageAdded();
+          this.clearText();
+          this.toggleSubmitting();
+          this.props.toggleSubmitting();
+        }
+      }.bind(this));
+    };
   },
 
   render: function() {
@@ -74,8 +85,8 @@ var ChatInput = React.createClass({
             value={this.state.content.body}
             />
           </View>
-          <View style={styles.inputButton} />
-          <Button type='blue' style={styles.button} onPress={this.onSubmitButton}>
+          <View style={[styles.inputButton]} />
+          <Button type='blue' style={styles.button} disabled={this.state.submitting} onPress={this.onSubmitButton}>
             send
           </Button>
         </View>
