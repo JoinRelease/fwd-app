@@ -10,6 +10,7 @@ var {
 
 var cssVar = require('../Lib/cssVar');
 var CurrentUserStore = require('../Stores/CurrentUserStore');
+var Lightbox = require('react-native-lightbox');
 
 
 var Text       = require('../Components/Text');
@@ -78,14 +79,16 @@ var LogItem = React.createClass({
     return (
       <View style={styles.imageContainer}>
         <View style={{flexDirection: 'row'}}>
-          <Image style={styles.image}
-                    source = {{uri: imgurl}}>
-            <View style={styles.backdropView}>
-              <Text style={styles.activityName}>{this.props.name}</Text>
-              <Text style={styles.activityIntensity}>{this.props.intensity}</Text>
-            </View>
+          <Lightbox style={styles.lightBox} navigator={this.props.navigator}>
+            <Image style={styles.image}
+                      source = {{uri: imgurl}}>
+              <View style={styles.backdropView}>
+                <Text style={styles.activityName}>{this.props.name}</Text>
+                <Text style={styles.activityIntensity}>{this.props.intensity}</Text>
+              </View>
 
-          </Image>
+            </Image>
+          </Lightbox>
         </View>
       </View>
     );
@@ -238,9 +241,12 @@ var styles = StyleSheet.create({
   spacer: {
     width: 10,
   },
+  lightBox: {
+    alignItems: 'center'
+  },
   image: {
-    width: 335,
-    height: 335
+    // width: 335,
+     height: 335
   },
   underline: {
     borderBottomWidth: 0.5,
