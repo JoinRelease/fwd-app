@@ -26,7 +26,6 @@ var InvertedList = React.createClass({
     }
 
     var ListItem = ChatItem;
-
     return (
       <ListItem {...passAlong} {...item} key={"item" + (item.key || rowId)} />
     );
@@ -46,7 +45,6 @@ var InvertedList = React.createClass({
         renderRow={this.renderRow}
         loadData={this.props.reloadList}
         minBetweenTime={2000}
-        refreshDescription="Working Some Magic"
       />
     );
   }

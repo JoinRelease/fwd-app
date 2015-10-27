@@ -6,13 +6,13 @@ var {
 
 var TextInput   = require('../Components/TextInput');
 var Button      = require('../Components/Button');
-var ChatActions = require('../Actions/ChatActions');
+var PostActions = require('../Actions/PostActions');
 var AppActions  = require('../Actions/AppActions');
 var CurrentUserStore = require('../Stores/CurrentUserStore');
 
 var KeyboardListener = require('../Mixins/KeyboardListener');
 
-var ChatInput = React.createClass({
+var CommentInput = React.createClass({
   mixins: [KeyboardListener],
 
   getInitialState: function() {
@@ -21,16 +21,13 @@ var ChatInput = React.createClass({
 
   blankContent: function() {
     return {
-      content: {
-        body: '',
-      }
+      text: '',
+      submitting: false
     };
   },
 
   updateText: function(text) {
-    this.setState({content: {
-      body: text,
-    }});
+    this.setState({text: text});
   },
   clearText: function() {
     this.setState(this.blankContent);
@@ -40,13 +37,17 @@ var ChatInput = React.createClass({
     this.setState({submitting: (!this.state.submitting)})
   },
 
-  getFormData: function() {
-    data = new FormData();
-    for (var i in this.state.content) {
-      data.append(i, this.state.content[i]);
+  getSendData: function() {
+    data = {};
+    data.text = this.state.text
+    if (this.props.type === 'activity') {
+      data.activity_log_id = this.props.logId
     }
-
+    else {
+      data.food_log_id = this.props.logId
+    }
     return data;
+
   },
 
   onSubmitButton: function() {
@@ -55,10 +56,13 @@ var ChatInput = React.createClass({
       this.toggleSubmitting();
 
       var data = {};
-      data.params = this.getFormData();
-      data.room_id = this.props.roomId;
+      data.params = this.getSendData();
+      data.logId = this.props.logId;
+      data.type = this.props.logType;
+      this.clearText();
 
-      ChatActions.createMessage(data, function(e) {
+      //Comment Actions!!
+      PostActions.createLogComment(data, function(e) {
         this.props.updateProgress(e);
       }.bind(this),
       function(error) {
@@ -67,12 +71,18 @@ var ChatInput = React.createClass({
           alert(error.message);
         }
         else {
-          this.props.messageAdded();
-          this.clearText();
-          this.toggleSubmitting();
-          this.props.toggleSubmitting();
+
+          PostActions.fetchList(CurrentUserStore.get().data.username, function(error) {
+            // TODO: handle error
+            if (error) {
+              alert(error.message);
+            }
+
+          });
         }
+        AppActions.goBack(this.props.navigator);
       }.bind(this));
+
     };
   },
 
@@ -92,7 +102,7 @@ var ChatInput = React.createClass({
             enablesReturnKeyAutomatically={true}
             returnKeyType={'send'}
             onChangeText={this.updateText}
-            value={this.state.content.body}
+            value={this.state.text}
             />
           </View>
           <View style={[styles.inputButton]} />
@@ -127,4 +137,4 @@ var styles = StyleSheet.create({
   }
 });
 
-module.exports = ChatInput;
+module.exports = CommentInput;

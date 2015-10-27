@@ -16,8 +16,8 @@ var ChatActions = {
       }
     });
   },
-  createMessage: function(content, callback) {
-    ChatService.createMessage(content, function(error, messageProps) {
+  createMessage: function(content, progressCallback, callback) {
+    ChatService.createMessage(content, progressCallback, function(error, messageProps) {
       if(callback) callback(error);
       if (!error) {
         Dispatcher.dispatch({

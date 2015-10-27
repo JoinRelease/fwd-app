@@ -37,6 +37,18 @@ var PostActions = {
       }
     });
   },
+
+  createLogComment: function(content, progressCallback, callback) {
+    PostService.createLogComment(content, progressCallback, function(error, postProps) {
+      if (callback) callback(error);
+      if (!error) {
+        Dispatcher.dispatch({
+          actionType: AppConstants.POST_ADDED,
+          postProps: postProps
+        });
+      }
+    });
+  },
 };
 
 module.exports = PostActions;

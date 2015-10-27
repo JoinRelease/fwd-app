@@ -19,6 +19,7 @@ var CreateActivityLog = React.createClass({
   mixins: [KeyboardListener, NavBarHelper],
 
   getInitialState: function() {
+    console.log(this.props);
     return {
       time: new Date(),
       name: '',
@@ -109,23 +110,23 @@ var CreateActivityLog = React.createClass({
     var durationEdit;
     if (this.state.editingDuration) {
       durationEdit = (
-                      <TextInput
-                        clearTextOnFocus={false}
-                        onSubmitEditing={this.toggleDurationEdit}
-                        onBlur={this.toggleDurationEdit}
-                        onChangeText={this.changeDuration}
-                        keyboardType={'numeric'}
-                        style={[styles.right, styles.durationEdit]}
-                        value={this.state.duration.toString()}
-                      />
-                      )
+        <TextInput
+          clearTextOnFocus={false}
+          onSubmitEditing={this.toggleDurationEdit}
+          onBlur={this.toggleDurationEdit}
+          onChangeText={this.changeDuration}
+          keyboardType={'numeric'}
+          style={[styles.right, styles.durationEdit]}
+          value={this.state.duration.toString()}
+        />
+      )
     }
     else {
       durationEdit = (
-                      <Text style={[styles.right, styles.durationLabel]} onPress={this.toggleDurationEdit}>
-                        {this.state.duration} mins.
-                      </Text>
-                      )
+        <Text style={[styles.right, styles.durationLabel]} onPress={this.toggleDurationEdit}>
+          {this.state.duration} mins.
+        </Text>
+      )
     }
     return (
       <View style={styles.flex}>
@@ -182,7 +183,7 @@ var styles = StyleSheet.create({
 
   },
   button: {
-    // width: 150
+
   },
   left: {
     flex: 1,

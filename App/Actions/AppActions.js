@@ -15,11 +15,13 @@ var AppActions = {
     });
   },
 
-  launchRoutePath: function(routePath) {
+  // passProps will be available to the launched route via this.props.passProps
+  launchRoutePath: function(routePath, passProps) {
     console.log("Launching! " + routePath);
     Dispatcher.dispatch({
       actionType: AppConstants.LAUNCH_ROUTE_PATH,
-      routePath: routePath
+      routePath: routePath,
+      passProps: passProps
     });
   },
 
@@ -38,7 +40,7 @@ var AppActions = {
     }
     else if (props.routePath) {
       console.log(props.routePath);
-      this.launchRoutePath(props.routePath);
+      this.launchRoutePath(props.routePath, props.passProps);
     }
     else {
       console.log("Unknown launchItem");
@@ -58,6 +60,7 @@ var AppActions = {
     }
     navItem.currentRoute = currentRoute;
     this.launchItem(navItem);
+
   },
 
   launchNavItem: function(currentRoute, item) {

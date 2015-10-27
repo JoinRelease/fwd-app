@@ -78,6 +78,14 @@ var PostService = {
       callback(error, postProps);
     });
   },
+  createLogComment: function(data, progressCallback, callback) {
+    var logType = (data.type === 'activity') ? 'activity_logs' : 'food_logs';
+    client.post((logType + '/' + data.logId + '/comments'), data.params, function(error, response) {
+      var postProps = PostService.parseActivityLog(response);
+      postProps.username = CurrentUserStore.get().data.username;
+      callback(error, postProps);
+    });
+  },
 
 };
 

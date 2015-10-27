@@ -60,6 +60,7 @@ var CreateActivityLog = React.createClass({
             alert(error.message);
           }
         });
+
         AppActions.goBack(this.props.navigator);
       }
     }.bind(this));
@@ -78,6 +79,8 @@ var CreateActivityLog = React.createClass({
   changeDuration: function(time) {
     this.setState({time: time});
   },
+
+
   _takePicture: function() {
     var options = {
       title: 'Select Food Image', // specify null or empty string to remove the title
@@ -97,14 +100,14 @@ var CreateActivityLog = React.createClass({
     // response.uri is the uri to the local file asset on the device
     // response.isVertical will be true if the image is vertically oriented
     UIImagePickerManager.showImagePicker(options, (didCancel, response) => {
-      console.log('Response = ', response);
+      //console.log('Response = ', response);
 
       if (didCancel) {
-        console.log('User cancelled image picker');
+        //console.log('User cancelled image picker');
       }
       else {
         if (response.customButton) {
-          console.log('User tapped custom button: ', response.customButton);
+          //console.log('User tapped custom button: ', response.customButton);
         }
         else {
           // You can display the image using either:
@@ -123,61 +126,60 @@ var CreateActivityLog = React.createClass({
   renderProgress: function() {
     if (this.state.loading) {
       return (
-              <ProgressViewIOS progress={this.state.uploadProgress}/>
-              );
+        <ProgressViewIOS progress={this.state.uploadProgress}/>
+      );
     }
     else {
       return (
-              <View />
-              );
+        <View />
+      );
     }
   },
 
   renderTime: function() {
     if (this.state.editingTime) {
       return (
-                      <TextInput
-                        clearTextOnFocus={false}
-                        autoFocus={true}
-                        onSubmitEditing={this.toggleDurationEdit}
-                        onBlur={this.toggleDurationEdit}
-                        onChangeText={this.changeDuration}
-                        keyboardType={'numeric'}
-                        style={[styles.right, styles.timeEdit]}
-                        value={this.state.time.toString()}
-                      />
-                      )
+        <TextInput
+          clearTextOnFocus={false}
+          autoFocus={true}
+          onSubmitEditing={this.toggleDurationEdit}
+          onBlur={this.toggleDurationEdit}
+          onChangeText={this.changeDuration}
+          keyboardType={'numeric'}
+          style={[styles.right, styles.timeEdit]}
+          value={this.state.time.toString()}
+        />
+      )
     }
     else {
       return (
-                      <Text style={[styles.right, styles.timeLabel]} onPress={this.toggleDurationEdit}>
-                        {this.state.time.toString()}
-                      </Text>
-                      )
+        <Text style={[styles.right, styles.timeLabel]} onPress={this.toggleDurationEdit}>
+          {this.state.time.toString()}
+        </Text>
+      )
     }
   },
 
   renderImage: function() {
     if (this.state.imageChosen) {
       return (
-              <View style={[styles.image, styles.imageIcon]}>
-                <TouchableOpacity onPress={this._takePicture} >
-                  <Image style={styles.image}
-                    source = {{uri: this.state.image.uri}}/>
-                </TouchableOpacity>
-              </View>
-              );
+        <View style={[styles.image, styles.imageIcon]}>
+          <TouchableOpacity onPress={this._takePicture} >
+            <Image style={styles.image}
+              source = {{uri: this.state.image.uri}}/>
+          </TouchableOpacity>
+        </View>
+      );
     }
     else {
       return (
+        <View style={[styles.image, styles.imageIcon]}>
+          <TouchableOpacity onPress={this._takePicture}>
+            <Icon name="plus" size={30} color="#000" />
+          </TouchableOpacity>
+        </View>
 
-                <View style={[styles.image, styles.imageIcon]}>
-                  <TouchableOpacity onPress={this._takePicture}>
-                    <Icon name="plus" size={30} color="#000" />
-                  </TouchableOpacity>
-                </View>
-
-              );
+      );
     }
   },
 

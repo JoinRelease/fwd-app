@@ -43,7 +43,6 @@ var SimpleList = React.createClass({
         renderRow={this.renderRow}
         loadData={this.props.reloadList}
         minBetweenTime={2000}
-        refreshDescription="Working Some Magic"
       />
     );
   }

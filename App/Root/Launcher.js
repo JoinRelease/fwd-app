@@ -9,8 +9,9 @@ var Launcher = {
     switch(action.actionType) {
       case AppConstants.LAUNCH_ROUTE_PATH:
         var routePath = action.routePath;
+        var passProps = action.passProps;
         var loggedIn = root.state && root.state.user.isLoggedIn();
-        var parsed = Routes.parse(routePath, loggedIn, false);
+        var parsed = Routes.parse(routePath, loggedIn, false, passProps);
         if (!parsed) {
           alert("Unknown route: " + routePath);
         }

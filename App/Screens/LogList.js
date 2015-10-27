@@ -3,6 +3,7 @@ var React = require('react-native');
 var ListHelper = require('../Mixins/ListHelper');
 
 var PostListStore = require('../Stores/PostListStore');
+var CurrentUserStore = require('../Stores/CurrentUserStore');
 var PostActions   = require('../Actions/PostActions');
 
 
@@ -145,6 +146,16 @@ updateDay: function(day) {
   },
 
   foodItemProps: function(log) {
+    var current_user = CurrentUserStore.get().data;
+    var firstComment = {
+      key: 1,
+      user_id: current_user.id,
+      username: current_user.username,
+      text: log.data.description,
+      updated_at: log.data.updated_at,
+    }
+
+    var listComments = [firstComment].concat(log.data.comments);
     return {
       key: log.data.id,
       type: log.data.type_of_log,
@@ -155,9 +166,24 @@ updateDay: function(day) {
       comments: log.data.comments,
 
       subPath: '_comments',
+      passProps: {
+        comments: listComments,
+        log_id: log.data.id,
+        type: log.data.type
+      }
     }
   },
   activityItemProps: function(log) {
+    var current_user = CurrentUserStore.get().data;
+
+    var firstComment = {
+      key: 1,
+      user_id: current_user.id,
+      username: current_user.username,
+      text: log.data.notes,
+      updated_at: log.data.updated_at,
+    }
+    var listComments = [firstComment].concat(log.data.comments);
     return {
       key: log.data.id,
       type: log.data.type_of_log,
@@ -169,6 +195,11 @@ updateDay: function(day) {
       comments: log.data.comments,
 
       subPath: '_comments',
+      passProps: {
+        comments: listComments,
+        log_id: log.data.id,
+        type: log.data.type_of_log
+      }
     }
   },
 

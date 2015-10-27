@@ -42,6 +42,7 @@ var Container = React.createClass({
         <Component ref="mainComponent"
           navigator={this.props.navigator}
           currentRoute={this.props.route}
+          passProps={this.props.routeStack.passProps}
           {...this.props.route.passProps}
         />
       </View>

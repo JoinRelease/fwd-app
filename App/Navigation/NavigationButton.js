@@ -38,7 +38,7 @@ var NavigationButton = React.createClass({
 
     if (item.mixIcon) {
       comp = (
-                <Icon name={item.mixIcon.icon} size={40} color="#FFF" style={[ styles[item.label + 'NavBar'], item.disabled && styles.disabledText]}>
+                <Icon name={item.mixIcon.icon} size={40} color="#FFF" style={[styles[item.label + 'NavBar'], item.disabled && styles.disabledText]}>
                     <Text style={[styles.navBarText, styles.navBarIconText, styles.navBarButtonText, styles[item.mixIcon.label + 'NavBar'], item.disabled && styles.disabledText]}>
                       {item.mixIcon.label}
                     </Text>
@@ -47,7 +47,7 @@ var NavigationButton = React.createClass({
     }
     else if (item.icon) {
       comp = (
-              <Icon name={item.icon} size={30} color="#FFF" style={[styles[item.label + 'NavBar'], item.disabled && styles.disabledText]} />
+              <Icon name={item.icon} size={30} color="#FFF" style={[styles.navBarIcon, styles[item.label + 'NavBar'], item.disabled && styles.disabledText]} />
               )
     }
     else {
@@ -120,14 +120,14 @@ var NavigationButton = React.createClass({
 var styles = StyleSheet.create({
   navBarText: {
     fontSize: 18,
-    marginVertical: 10,
+    marginVertical: 8,
   },
   navBarIconText: {
     marginLeft: 5,
     justifyContent: 'center'
   },
   navBarIcon: {
-    marginVertical: 10,
+    marginVertical: 8,
   },
   navBarLeftButton: {
     paddingLeft: 10,

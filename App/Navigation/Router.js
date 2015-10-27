@@ -37,7 +37,7 @@ parseUri.options = {
 // TODO: can we use https://github.com/visionmedia/page.js
 var Router = {
 
-  parse: function(str, parent, defaulted) {
+  parse: function(str, parent, defaulted, passProps) {
     if (!str) {
       str = "";
     }
@@ -72,7 +72,7 @@ var Router = {
           else {
             route.routePath = piece;
           }
-          
+
           if (route._routerReplace) {
             stack[stack.length-1] = route;
           }
@@ -111,6 +111,9 @@ var Router = {
     // TODO: add query parameters to last item on stack
     found.currentPath = stack[stack.length - 1].routePath;
     found.path = stack;
+    if (passProps){
+      found.passProps = passProps;
+    }
     return found;
   }
 };

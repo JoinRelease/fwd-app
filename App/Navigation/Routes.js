@@ -65,15 +65,15 @@ var Routes = {
       }
     };
   },
-  // CreateComment: function() {
-  //   return {
-  //     component: require('../Screens/CreateActivityLog'),
-  //     title: 'New Comment',
-  //     navBack: {
-  //       icon: 'android-arrow-back'
-  //     }
-  //   };
-  // },
+  CreateComment: function() {
+    return {
+      component: require('../Screens/CommentCreate'),
+      title: 'New Comment',
+      navBack: {
+        icon: 'android-arrow-back'
+      }
+    };
+  },
 
   NutritionRoom: function() {
     return {
@@ -126,6 +126,8 @@ var listRoute = function(route, defaultRoute) {
         // only on 'Dashboard'
         if(username) return null;
         return Routes.Settings();
+      case '_comments':
+        return Routes.CreateComment();
       case '_nutrition':
       console.log('nutri');
         return Routes.NutritionRoom();
@@ -213,15 +215,15 @@ var LoggedOut = {
 };
 
 module.exports = {
-  parse: function(str, loggedIn, defaulted) {
+  parse: function(str, loggedIn, defaulted, passProps) {
     var parent = loggedIn ? LoggedIn : LoggedOut;
-    var found = Router.parse(str, parent, defaulted);
+    var found = Router.parse(str, parent, defaulted, passProps);
     if (!found && defaulted) {
       if (loggedIn) {
-        found = this.parse('dashboard', true, false);
+        found = this.parse('dashboard', true, false, passProps);
       }
       else {
-        found = this.parse('signup', false, false);
+        found = this.parse('signup', false, false, passProps);
       }
     }
     return found;

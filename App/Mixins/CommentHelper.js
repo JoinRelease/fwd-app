@@ -11,8 +11,6 @@ var React = require('react-native');
 var {
   View,
   StyleSheet,
-  ActivityIndicatorIOS,
-  InteractionManager,
   ListView,
   ProgressViewIOS
 } = React;
@@ -23,22 +21,19 @@ var NavBarHelper       = require('../Mixins/NavBarHelper');
 
 var Loading          = require('../Screens/Loading');
 var Text             = require('../Components/Text');
-var WeekView         = require('../Components/WeekView');
-var TabbedControl    = require('../Components/TabbedControl');
-var SegmentedControl    = require('../Components/SegmentedControl');
-var InvertedList       = require('../Components/InvertedList');
 var AppActions       = require('../Actions/AppActions');
+var CommentItem = require('../Components/CommentItem');
 
-var ChatInput = require('../Components/ChatInput');
+// change to comment input or generalise to make it footerinput
+var CommentInput = require('../Components/CommentInput');
 
+var ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
 
-var ChatHelper = {
+var CommentHelper = {
   mixins: [NavigationListener, NavBarHelper],
 
   getInitialState: function() {
-    var state = this.getListState();
-    state.renderPlaceHolder = true;
-    return state
+    return this.getListState();
   },
 
   getListState: function() {
@@ -46,6 +41,7 @@ var ChatHelper = {
       items: this.getListItems(),
       sending: false,
       progress: null,
+      logData: this.props.passProps
     };
   },
 
@@ -81,24 +77,6 @@ var ChatHelper = {
     this.setState(this.getListState());
   },
 
-  componentDidMount: function() {
-    this.getListState();
-    InteractionManager.runAfterInteractions(() => {
-      this.setState({renderPlaceHolder: false});
-    });
-    // Changed from whatever it is in ListHelper, change back if necessary! 10/21/15
-    this.props.store.addChangeListener(this._onChange);
-    if (this.reloadList) {
-      this.reloadList();
-    };
-  },
-
-  componentWillUnmount: function() {
-
-    // Changed from whatever it is in ListHelper, change back if necessary! 10/21/15
-    this.props.store.removeChangeListener(this._onChange);
-  },
-
 
   getUsername: function() {
     if (!this.username) {
@@ -120,33 +98,24 @@ var ChatHelper = {
     }
   },
 
+  renderCommentRow: function(item, sectionId, rowId) {
+
+    return (
+      <CommentItem {...item} key={'item'+ (item.id || rowId)}/>
+    )
+  },
+
   renderItems: function() {
-    var list;
-    if (this.state.renderPlaceHolder) {
-      list = (
-        <InvertedList
-         style={styles.flex}
-         currentRoute={this.props.currentRoute}
-         getItemProps={this.getItemProps}
-         items={[]}
-         reloadList={this.reloadList}
-         {...this.props.listProps}
-       />
-      );
-    }
-    else {
-      list = (
-       <InvertedList
-         style={styles.flex}
-         currentRoute={this.props.currentRoute}
-         getItemProps={this.getItemProps}
-         items={this.state.items}
-         reloadList={this.reloadList}
-         {...this.props.listProps}
-       />
-     );
-    }
-    return list;
+    return (
+      <ListView
+        automaticallyAdjustContentInsets={true}
+        dataSource={ds.cloneWithRows(this.state.items)}
+        renderRow={this.renderCommentRow}
+        getItemProps={this.getItemProps}
+        bounces={false}
+        scrollEnabled={false}
+      />
+    );
   },
 
   renderEmpty: function() {
@@ -172,8 +141,8 @@ var ChatHelper = {
       <View style={styles.flex}>
         {progress}
         {content}
-        <ChatInput toggleSubmitting={this.toggleSending} updateProgress={this.updateProgress}
-          messageAdded={this.messageAdded} roomId={this.props.room_id} />
+        <CommentInput toggleSubmitting={this.toggleSending} updateProgress={this.updateProgress}
+          logType={this.state.logData.type} navigator={this.props.navigator} logId={this.state.logData.log_id} />
       </View>
     );
   },
@@ -196,12 +165,7 @@ var styles = StyleSheet.create({
   description: {
     fontSize: 20,
     textAlign: 'center',
-    justifyContent: 'center',
     color: '#FFFFFF'
-  },
-  spinner: {
-    height: 40,
-    width: 40,
   },
   container: {
     flex: 1,
@@ -228,4 +192,4 @@ var styles = StyleSheet.create({
   }
 });
 
-module.exports = ChatHelper;
+module.exports = CommentHelper;
